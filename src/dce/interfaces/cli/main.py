@@ -394,6 +394,36 @@ def build_cmd(
     raise typer.Exit(code=1)
 
 
+@app.command("tools")
+def tools_cmd(
+    as_json: Annotated[
+        bool,
+        typer.Option("--json", help="Emit machine-readable JSON on stdout."),
+    ] = False,
+) -> None:
+    """List stable MCP tools (schema_version 1 contract)."""
+    from dce.interfaces.mcp.contract import PRIMARY_TOOL, STABLE_TOOLS
+
+    tools = sorted(STABLE_TOOLS)
+    if as_json:
+        _print_json(
+            {
+                "schema_version": "1",
+                "primary_tool": PRIMARY_TOOL,
+                "stable_tools": tools,
+            }
+        )
+        return
+    table = Table(title="dce tools (MCP)")
+    table.add_column("Tool")
+    table.add_column("Role")
+    for name in tools:
+        role = "primary" if name == PRIMARY_TOOL else "stable"
+        table.add_row(name, role)
+    console.print(table)
+    console.print(f"primary: {PRIMARY_TOOL} · count: {len(tools)}")
+
+
 @app.command("facets")
 def facets_cmd(
     path: Annotated[

@@ -51,6 +51,19 @@ def test_cli_facets(tmp_path: Path) -> None:
     assert any(item["value"] == "payments" for item in payload["facets"]["projects"])
 
 
+def test_cli_tools() -> None:
+    import json
+
+    table = runner.invoke(app, ["tools"])
+    assert table.exit_code == 0, table.stdout
+    assert "build_context" in table.stdout
+    as_json = runner.invoke(app, ["tools", "--json"])
+    assert as_json.exit_code == 0, as_json.stdout
+    payload = json.loads(as_json.stdout)
+    assert payload["primary_tool"] == "build_context"
+    assert "workspace_status" in payload["stable_tools"]
+
+
 def test_cli_index_json(tmp_path: Path) -> None:
     import json
 

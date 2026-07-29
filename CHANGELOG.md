@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.23.0).
+- Nothing yet (post 1.24.0).
+
+## [1.24.0] - 2026-07-29
+
+### Added
+
+- PB-104: CLI `dce tools` / `dce tools --json` — list stable MCP tools.
 
 ## [1.23.0] - 2026-07-29
 
@@ -389,7 +395,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.23.0...HEAD
+[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.24.0...HEAD
+[1.24.0]: https://github.com/adrianosbotelho/DCE/compare/v1.23.0...v1.24.0
 [1.23.0]: https://github.com/adrianosbotelho/DCE/compare/v1.22.0...v1.23.0
 [1.22.0]: https://github.com/adrianosbotelho/DCE/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/adrianosbotelho/DCE/compare/v1.20.0...v1.21.0
