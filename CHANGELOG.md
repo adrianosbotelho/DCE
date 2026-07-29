@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.12.0).
+- Nothing yet (post 1.13.0).
+
+## [1.13.0] - 2026-07-29
+
+### Added
+
+- PB-071: MCP tool `search_by_project` — typed alias scoping `search_context` to a project slug (`payments` / `project:payments`).
+
+### Notes
+
+- Additive to MCP `schema_version` `"1"`; contract freeze updated.
 
 ## [1.12.0] - 2026-07-29
 
@@ -281,7 +291,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianobotelho/DCE/compare/v1.12.0...HEAD
+[Unreleased]: https://github.com/adrianobotelho/DCE/compare/v1.13.0...HEAD
+[1.13.0]: https://github.com/adrianobotelho/DCE/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/adrianobotelho/DCE/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/adrianobotelho/DCE/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/adrianobotelho/DCE/compare/v1.9.0...v1.10.0

@@ -39,6 +39,14 @@ def normalize_issue_key(raw: str) -> str:
     return key.upper()
 
 
+def normalize_project_slug(raw: str) -> str:
+    """Normalize ``payments`` / ``project:payments`` into a project filter slug."""
+    value = raw.strip()
+    if value.lower().startswith("project:"):
+        value = value.split(":", 1)[1].strip()
+    return value
+
+
 def _merge_budget(
     base: ContextBudget,
     *,
@@ -77,6 +85,7 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
             "Use search_context for raw ranked hits. "
             "Use search_memory for curated local memory notes only. "
             "Use search_by_issue for Jira-like keys (PAY-123). "
+            "Use search_by_project to scope hits to one project slug. "
             "Use get_document / recent_documents for direct lookups. "
             "All responses are structured JSON with schema_version."
         ),
@@ -223,6 +232,40 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
                 component=component,
                 technology=technology,
                 tags=None,
+                source_types=source_types,
+            ),
+            limit=max(1, min(limit, 500)),
+        )
+        with connect(database_path) as conn:
+            repository = SqliteDocumentRepository(conn)
+            hits = repository.search(spec)
+        return SearchContextResult(documents=hits)
+
+    @server.tool()
+    def search_by_project(
+        project: str,
+        text: str = "",
+        limit: int = 20,
+        component: str | None = None,
+        technology: str | None = None,
+        tags: list[str] | None = None,
+        source_types: list[str] | None = None,
+    ) -> SearchContextResult:
+        """Search documents scoped to a single project slug (e.g. payments).
+
+        Convenience alias over search_context with filters.project set.
+        Prefer build_context for broader development questions.
+        """
+        slug = normalize_project_slug(project)
+        if not slug:
+            return SearchContextResult(documents=[])
+        spec = SearchSpec(
+            text=text,
+            filters=_filters(
+                project=slug,
+                component=component,
+                technology=technology,
+                tags=tags,
                 source_types=source_types,
             ),
             limit=max(1, min(limit, 500)),

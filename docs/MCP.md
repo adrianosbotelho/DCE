@@ -35,10 +35,11 @@ sequenceDiagram
 | `search_context` | FTS rankeado | `{schema_version, documents[]}` |
 | `search_memory` | Alias tipado: só `source_type=memory` | `{schema_version, documents[]}` |
 | `search_by_issue` | Alias tipado: FTS por chave `PAY-123` | `{schema_version, documents[]}` |
+| `search_by_project` | Alias tipado: escopo por slug de projeto | `{schema_version, documents[]}` |
 | `get_document` | Lookup por id | `{schema_version, found, document}` |
 | `recent_documents` | Mais recentes + filtros | `{schema_version, documents[]}` |
 
-`search_memory` entrou em **1.1.0**; `search_by_issue` em **1.9.0** (aditivos; `schema_version` permanece `"1"`).
+`search_memory` entrou em **1.1.0**; `search_by_issue` em **1.9.0**; `search_by_project` em **1.13.0** (aditivos; `schema_version` permanece `"1"`).
 
 ### `build_context` — parâmetros
 
@@ -103,8 +104,9 @@ O processo MCP **não deve** escrever prosa em stdout (stdio é o canal do proto
 2. Usar `search_context` só quando precisar de hits crus.
 3. Usar `search_memory` para notas locais curadas (`.dce/memory`).
 4. Usar `search_by_issue` para chaves Jira-like (`PAY-125`).
-4. Usar `get_document` / `recent_documents` para lookup pontual.
-5. Respeitar `diagnostics.truncated` e o budget — o pacote já veio cortado de propósito.
+5. Usar `search_by_project` para restringir hits a um projeto (`payments` / `project:payments`).
+6. Usar `get_document` / `recent_documents` para lookup pontual.
+7. Respeitar `diagnostics.truncated` e o budget — o pacote já veio cortado de propósito.
 
 ---
 

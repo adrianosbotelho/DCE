@@ -16,6 +16,7 @@ STABLE_TOOLS: Final[frozenset[str]] = frozenset(
         "recent_documents",
         "search_memory",
         "search_by_issue",
+        "search_by_project",
     }
 )
 

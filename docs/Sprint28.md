@@ -2,7 +2,7 @@
 
 **Sprint:** 28  
 **Release alvo:** 1.12.0  
-**Status:** ✅ Concluída (aguardando aprovação para Sprint 29)  
+**Status:** ✅ Concluída  
 **Última atualização:** 2026-07-29
 
 ---

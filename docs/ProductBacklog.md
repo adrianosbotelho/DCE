@@ -78,7 +78,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | ID | Item | P | MoSCoW | Tam | Épico | Notas |
 |----|------|---|--------|-----|-------|-------|
 | PB-070 | `search_by_issue` | P2 | Could | XS | E4 | ✅ Sprint 25 |
-| PB-071 | `search_by_project` | P2 | Could | XS | E4 | |
+| PB-071 | `search_by_project` | P2 | Could | XS | E4 | ✅ Sprint 29 |
 | PB-072 | `search_by_component` | P2 | Could | XS | E4 | |
 | PB-073 | `search_by_technology` | P2 | Could | XS | E4 | |
 | PB-074 | `search_by_tag` | P2 | Could | XS | E4 | |
@@ -144,7 +144,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 28 concluída tecnicamente (`1.12.0`).  
-PB-096 (Git bootstrap + cut-release).  
-Próxima: Sprint 29 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint28.md`](Sprint28.md) · [`ReleaseGit.md`](ReleaseGit.md).
+Sprint 29 concluída tecnicamente (`1.13.0`).  
+PB-071 (`search_by_project`).  
+Próxima: Sprint 30 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint29.md`](Sprint29.md) · [`MCP.md`](MCP.md).

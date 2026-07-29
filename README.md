@@ -12,16 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.12.0` (Sprint 28) |
-| Fase | Pós-1.0 — **Sprint 28 concluída; aguardando aprovação para Sprint 29** |
+| Versão | `1.13.0` (Sprint 29) |
+| Fase | Pós-1.0 — **Sprint 29 concluída; aguardando aprovação para Sprint 30** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
+**1.13.0:** + MCP `search_by_project` (PB-071).  
 **1.12.0:** + Git bootstrap + `cut_release.sh` (PB-096).  
-**1.11.0:** + Windows ZIP em GitHub Releases + SHA-256 (PB-095).  
-**1.10.0–1.0.0:** Windows portable, MCP aliases, hooks, logging, Jira REST, Context Builder.  
-Windows: workflow **Windows Portable** / Releases — [`docs/Windows.md`](docs/Windows.md).  
-Git release: [`docs/ReleaseGit.md`](docs/ReleaseGit.md) · Publish PyPI: `./scripts/publish.sh --upload` (token).
+**1.11.0–1.0.0:** Windows Releases, portable ZIP, MCP aliases, Context Builder.  
+Windows: [`docs/Windows.md`](docs/Windows.md) · Git: [`docs/ReleaseGit.md`](docs/ReleaseGit.md) · PyPI: `./scripts/publish.sh --upload`.
 
 ---
 
@@ -114,7 +113,7 @@ Exemplo de registro MCP (Kiro / clientes compatíveis):
 }
 ```
 
-Tools estáveis: `build_context` (primária), `search_context`, `search_memory`, `search_by_issue`, `get_document`, `recent_documents`.
+Tools estáveis: `build_context` (primária), `search_context`, `search_memory`, `search_by_issue`, `search_by_project`, `get_document`, `recent_documents`.
 
 Qualidade:
 
@@ -218,10 +217,11 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 | `search_context` | Busca filtrada no índice |
 | `search_memory` | Alias tipado — só notas `memory` |
 | `search_by_issue` | Alias tipado — chave Jira-like (`PAY-123`) |
+| `search_by_project` | Alias tipado — escopo por projeto |
 | `get_document` | Documento completo por ID |
 | `recent_documents` | Documentos recentes |
 
-Aliases `search_by_*` ficam fora do contrato até evidência de uso.
+Demais aliases `search_by_*` (component/technology/tag) ficam fora do contrato até evidência de uso.
 
 ---
 
@@ -248,18 +248,18 @@ Aliases `search_by_*` ficam fora do contrato até evidência de uso.
 
 ## Próximo passo
 
-Sprint 28 encerrada. **Sprint 29 inicia somente após aprovação explícita.**
+Sprint 29 encerrada. **Sprint 30 inicia somente após aprovação explícita.**
 
 Para cortar/publicar release:
 
 ```bash
-./scripts/cut_release.sh          # tag local v1.12.0
+./scripts/cut_release.sh          # tag local v1.13.0
 # configurar origin, depois:
 git push -u origin HEAD && ./scripts/cut_release.sh --push
 # Actions → Windows Portable → Release assets
 ```
 
-Ver: [`docs/Sprint28.md`](docs/Sprint28.md) · [`docs/ReleaseGit.md`](docs/ReleaseGit.md) · [`docs/ReleaseWindows.md`](docs/ReleaseWindows.md).
+Ver: [`docs/Sprint29.md`](docs/Sprint29.md) · [`docs/MCP.md`](docs/MCP.md) · [`docs/ReleaseGit.md`](docs/ReleaseGit.md).
 
 ---
 

@@ -186,6 +186,35 @@ def test_mcp_search_by_issue_finds_jira_key(tmp_path: Path) -> None:
     assert "PAY-125" in uris
 
 
+def test_mcp_search_by_project_scopes_hits(tmp_path: Path) -> None:
+    root = tmp_path / "ws"
+    _seed(root)
+    server = create_mcp_server(root)
+    result = _call(
+        server,
+        "search_by_project",
+        {"project": "project:payments", "text": "ORA-12541", "limit": 10},
+    )
+    assert result.is_error is False
+    payload = result.structured_content
+    assert payload["schema_version"] == MCP_SCHEMA_VERSION
+    assert len(payload["documents"]) >= 1
+    assert all(item["document"]["project"] == "payments" for item in payload["documents"])
+    titles = {item["document"]["title"] for item in payload["documents"]}
+    assert "Oracle listener" in titles
+
+
+def test_mcp_search_by_project_empty_slug(tmp_path: Path) -> None:
+    root = tmp_path / "ws"
+    _seed(root)
+    server = create_mcp_server(root)
+    result = _call(server, "search_by_project", {"project": "project:", "limit": 10})
+    assert result.is_error is False
+    payload = result.structured_content
+    assert payload["schema_version"] == MCP_SCHEMA_VERSION
+    assert payload["documents"] == []
+
+
 def test_cli_mcp_requires_workspace(tmp_path: Path) -> None:
     result = runner.invoke(app, ["mcp", "--path", str(tmp_path / "missing")])
     assert result.exit_code == 1
