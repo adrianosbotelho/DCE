@@ -1,6 +1,6 @@
 # Kiro — adoção rápida do DCE
 
-**Status:** Sprint 33 (`1.17.0`)
+**Status:** Sprint 35 (`1.19.0`)
 
 Guia curto para conectar o [Kiro](https://kiro.dev) ao Dev Context Engine via MCP stdio.
 
@@ -13,7 +13,8 @@ dce index /path/to/workspace
 dce doctor /path/to/workspace
 ```
 
-`dce doctor` deve listar `mcp` (tools estáveis) e `documents` (> 0 após o index).
+`dce doctor` deve listar `mcp` (tools estáveis) e `documents` (> 0 após o index).  
+Para automação: `dce doctor --json`.
 
 ## 2. Configurar MCP no Kiro
 

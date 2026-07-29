@@ -52,6 +52,7 @@ timeline
 | **1.16.0** | MCP alias | `search_by_tag` — completes `search_by_*` set | Push/PyPI / signing |
 | **1.17.0** | Adoption | Doctor MCP/index + Kiro guide + GitHub bootstrap | PyPI upload / signing |
 | **1.18.0** | Release path | CI format green + Publish Trusted Publisher (OIDC) | First PyPI upload |
+| **1.19.0** | First publish | Pending-publisher runbook + `doctor --json` + Actions Node 24 | Maintainer OIDC upload |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 

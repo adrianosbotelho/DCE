@@ -9,7 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.18.0).
+- Nothing yet (post 1.19.0).
+
+## [1.19.0] - 2026-07-29
+
+### Added
+
+- PB-099: `dce doctor --json` (machine-readable health + MCP tool list).
+- Docs: [`docs/PublishPyPI.md`](docs/PublishPyPI.md) — pending Trusted Publisher first-upload runbook.
+- GitHub environment `pypi` for OIDC publish.
+
+### Changed
+
+- GitHub Actions: `actions/checkout@v5`, `actions/setup-python@v6` (Node 24 runtime).
 
 ## [1.18.0] - 2026-07-29
 
@@ -345,7 +357,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.18.0...HEAD
+[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.19.0...HEAD
+[1.19.0]: https://github.com/adrianosbotelho/DCE/compare/v1.18.0...v1.19.0
 [1.18.0]: https://github.com/adrianosbotelho/DCE/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/adrianosbotelho/DCE/compare/v1.16.0...v1.17.0
 [1.16.0]: https://github.com/adrianosbotelho/DCE/compare/v1.15.0...v1.16.0

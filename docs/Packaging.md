@@ -1,8 +1,8 @@
 # Packaging — Dev Context Engine (DCE)
 
-**Status:** Ready to publish (upload gated by Trusted Publisher / token)  
-**Release:** `1.18.0`  
-**Backlog:** PB-090 (wheel) · PB-094 (Windows ZIP) · PB-098 (publish OIDC)
+**Status:** Ready to publish (first upload: [`PublishPyPI.md`](PublishPyPI.md))  
+**Release:** `1.19.0`  
+**Backlog:** PB-090 · PB-094 · PB-098 · PB-099
 
 ---
 

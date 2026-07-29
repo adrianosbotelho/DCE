@@ -12,15 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.18.0` (Sprint 34) |
-| Fase | Pós-1.0 — **Sprint 34 concluída; aguardando aprovação para Sprint 35** |
+| Versão | `1.19.0` (Sprint 35) |
+| Fase | Pós-1.0 — **Sprint 35 concluída; aguardando aprovação para Sprint 36** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
-**1.18.0:** + CI format green + Publish Trusted Publisher / OIDC (PB-098).  
-**1.17.0:** + Doctor MCP/index + guia Kiro + GitHub (PB-097).  
-**1.16.0–1.0.0:** Aliases MCP, cut-release, Windows Releases, Context Builder.  
-Kiro: [`docs/Kiro.md`](docs/Kiro.md) · Releases: [`docs/ReleaseVerify.md`](docs/ReleaseVerify.md).
+**1.19.0:** + `doctor --json` + runbook first PyPI (PB-099).  
+**1.18.0:** + CI format + Publish OIDC (PB-098).  
+**1.17.0–1.0.0:** Kiro guide, aliases MCP, Windows Releases, Context Builder.  
+PyPI: [`docs/PublishPyPI.md`](docs/PublishPyPI.md) · Kiro: [`docs/Kiro.md`](docs/Kiro.md).
 
 ---
 
@@ -251,15 +251,14 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 
 ## Próximo passo
 
-Sprint 34 encerrada. **Sprint 35 inicia somente após aprovação explícita.**
+Sprint 35 encerrada. **Sprint 36 inicia somente após aprovação explícita.**
 
 ```bash
 ./scripts/cut_release.sh && git push origin HEAD && ./scripts/cut_release.sh --push
-# Actions → CI + Windows Portable
-# PyPI: configure Trusted Publisher, then Actions → Publish
+# First PyPI: follow docs/PublishPyPI.md (pending Trusted Publisher)
 ```
 
-Ver: [`docs/Sprint34.md`](docs/Sprint34.md) · [`docs/ReleaseVerify.md`](docs/ReleaseVerify.md).
+Ver: [`docs/Sprint35.md`](docs/Sprint35.md) · [`docs/PublishPyPI.md`](docs/PublishPyPI.md).
 
 ---
 

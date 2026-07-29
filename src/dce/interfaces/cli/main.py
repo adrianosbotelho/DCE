@@ -125,17 +125,37 @@ def doctor_cmd(
         Path,
         typer.Argument(help="Workspace directory containing dce.yaml."),
     ] = Path("."),
+    as_json: Annotated[
+        bool,
+        typer.Option("--json", help="Emit machine-readable JSON on stdout."),
+    ] = False,
 ) -> None:
     """Check config, database, schema, FTS5, index size, MCP readiness, git hook."""
     report = doctor_workspace(path)
-    table = Table(title="dce doctor")
-    table.add_column("Check")
-    table.add_column("Status")
-    table.add_column("Detail")
-    for check in report.checks:
-        status = "[green]ok[/green]" if check.ok else "[red]fail[/red]"
-        table.add_row(check.name, status, check.detail)
-    console.print(table)
+    if as_json:
+        from dce.interfaces.mcp.contract import PRIMARY_TOOL, STABLE_TOOLS
+
+        _print_json(
+            {
+                "schema_version": "1",
+                "healthy": report.healthy,
+                "workspace_root": str(report.workspace_root),
+                "checks": [{"name": c.name, "ok": c.ok, "detail": c.detail} for c in report.checks],
+                "mcp": {
+                    "primary_tool": PRIMARY_TOOL,
+                    "stable_tools": sorted(STABLE_TOOLS),
+                },
+            }
+        )
+    else:
+        table = Table(title="dce doctor")
+        table.add_column("Check")
+        table.add_column("Status")
+        table.add_column("Detail")
+        for check in report.checks:
+            status = "[green]ok[/green]" if check.ok else "[red]fail[/red]"
+            table.add_row(check.name, status, check.detail)
+        console.print(table)
     if not report.healthy:
         raise typer.Exit(code=1)
 

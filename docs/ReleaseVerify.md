@@ -19,11 +19,12 @@ Example (verified for `v1.17.0`):
 
 ## PyPI publish (maintainer)
 
-1. One-time: on [pypi.org](https://pypi.org) → project `dev-context-engine` → **Publishing** → Trusted Publisher:
-   - Owner: `adrianosbotelho`
-   - Repository: `DCE`
-   - Workflow: `publish.yml`
-   - Environment: `pypi`
+First upload (project does not exist yet): follow [`PublishPyPI.md`](PublishPyPI.md)  
+(Pending Trusted Publisher + Actions → **Publish**).
+
+Afterwards:
+
+1. Trusted Publisher already bound to the project.
 2. Actions → **Publish** → `workflow_dispatch` → target `pypi` (or `testpypi`).
 3. Smoke: `pip install dev-context-engine==X.Y.Z && dce --version`
 
