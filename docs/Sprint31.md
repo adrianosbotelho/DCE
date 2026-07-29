@@ -2,7 +2,7 @@
 
 **Sprint:** 31  
 **Release alvo:** 1.15.0  
-**Status:** ✅ Concluída (aguardando aprovação para Sprint 32)  
+**Status:** ✅ Concluída  
 **Última atualização:** 2026-07-29
 
 ---

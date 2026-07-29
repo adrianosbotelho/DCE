@@ -49,6 +49,7 @@ timeline
 | **1.13.0** | MCP alias | `search_by_project` (additive schema_version 1) | `search_by_component/technology/tag` |
 | **1.14.0** | MCP alias | `search_by_component` (additive schema_version 1) | `search_by_technology/tag` |
 | **1.15.0** | MCP alias | `search_by_technology` (additive schema_version 1) | `search_by_tag` |
+| **1.16.0** | MCP alias | `search_by_tag` — completes `search_by_*` set | Push/PyPI / signing |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 
