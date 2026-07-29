@@ -80,7 +80,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-070 | `search_by_issue` | P2 | Could | XS | E4 | ✅ Sprint 25 |
 | PB-071 | `search_by_project` | P2 | Could | XS | E4 | ✅ Sprint 29 |
 | PB-072 | `search_by_component` | P2 | Could | XS | E4 | ✅ Sprint 30 |
-| PB-073 | `search_by_technology` | P2 | Could | XS | E4 | |
+| PB-073 | `search_by_technology` | P2 | Could | XS | E4 | ✅ Sprint 31 |
 | PB-074 | `search_by_tag` | P2 | Could | XS | E4 | |
 
 **Decisão de backlog:** Won't no horizonte 0.1–0.2; reavaliar após uso real no Kiro.
@@ -144,7 +144,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 30 concluída tecnicamente (`1.14.0`).  
-PB-072 (`search_by_component`).  
-Próxima: Sprint 31 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint30.md`](Sprint30.md) · [`MCP.md`](MCP.md).
+Sprint 31 concluída tecnicamente (`1.15.0`).  
+PB-073 (`search_by_technology`).  
+Próxima: Sprint 32 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint31.md`](Sprint31.md) · [`MCP.md`](MCP.md).

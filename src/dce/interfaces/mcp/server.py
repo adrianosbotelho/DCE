@@ -55,6 +55,14 @@ def normalize_component_slug(raw: str) -> str:
     return value
 
 
+def normalize_technology_slug(raw: str) -> str:
+    """Normalize ``oracle`` / ``technology:oracle`` into a technology filter slug."""
+    value = raw.strip()
+    if value.lower().startswith("technology:"):
+        value = value.split(":", 1)[1].strip()
+    return value
+
+
 def _merge_budget(
     base: ContextBudget,
     *,
@@ -95,6 +103,7 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
             "Use search_by_issue for Jira-like keys (PAY-123). "
             "Use search_by_project to scope hits to one project slug. "
             "Use search_by_component to scope hits to one component slug. "
+            "Use search_by_technology to scope hits to one technology slug. "
             "Use get_document / recent_documents for direct lookups. "
             "All responses are structured JSON with schema_version."
         ),
@@ -308,6 +317,40 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
                 project=project,
                 component=slug,
                 technology=technology,
+                tags=tags,
+                source_types=source_types,
+            ),
+            limit=max(1, min(limit, 500)),
+        )
+        with connect(database_path) as conn:
+            repository = SqliteDocumentRepository(conn)
+            hits = repository.search(spec)
+        return SearchContextResult(documents=hits)
+
+    @server.tool()
+    def search_by_technology(
+        technology: str,
+        text: str = "",
+        limit: int = 20,
+        project: str | None = None,
+        component: str | None = None,
+        tags: list[str] | None = None,
+        source_types: list[str] | None = None,
+    ) -> SearchContextResult:
+        """Search documents scoped to a single technology slug (e.g. oracle).
+
+        Convenience alias over search_context with filters.technology set.
+        Prefer build_context for broader development questions.
+        """
+        slug = normalize_technology_slug(technology)
+        if not slug:
+            return SearchContextResult(documents=[])
+        spec = SearchSpec(
+            text=text,
+            filters=_filters(
+                project=project,
+                component=component,
+                technology=slug,
                 tags=tags,
                 source_types=source_types,
             ),

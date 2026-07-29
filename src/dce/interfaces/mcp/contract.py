@@ -18,6 +18,7 @@ STABLE_TOOLS: Final[frozenset[str]] = frozenset(
         "search_by_issue",
         "search_by_project",
         "search_by_component",
+        "search_by_technology",
     }
 )
 

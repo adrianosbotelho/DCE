@@ -12,14 +12,14 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.14.0` (Sprint 30) |
-| Fase | Pós-1.0 — **Sprint 30 concluída; aguardando aprovação para Sprint 31** |
+| Versão | `1.15.0` (Sprint 31) |
+| Fase | Pós-1.0 — **Sprint 31 concluída; aguardando aprovação para Sprint 32** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
+**1.15.0:** + MCP `search_by_technology` (PB-073).  
 **1.14.0:** + MCP `search_by_component` (PB-072).  
-**1.13.0:** + MCP `search_by_project` (PB-071).  
-**1.12.0–1.0.0:** Git cut-release, Windows Releases, Context Builder.  
+**1.13.0–1.0.0:** MCP project alias, Git cut-release, Windows, Context Builder.  
 Windows: [`docs/Windows.md`](docs/Windows.md) · Git: [`docs/ReleaseGit.md`](docs/ReleaseGit.md) · PyPI: `./scripts/publish.sh --upload`.
 
 ---
@@ -113,7 +113,7 @@ Exemplo de registro MCP (Kiro / clientes compatíveis):
 }
 ```
 
-Tools estáveis: `build_context` (primária), `search_context`, `search_memory`, `search_by_issue`, `search_by_project`, `search_by_component`, `get_document`, `recent_documents`.
+Tools estáveis: `build_context` (primária), `search_context`, `search_memory`, `search_by_issue`, `search_by_project`, `search_by_component`, `search_by_technology`, `get_document`, `recent_documents`.
 
 Qualidade:
 
@@ -219,10 +219,11 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 | `search_by_issue` | Alias tipado — chave Jira-like (`PAY-123`) |
 | `search_by_project` | Alias tipado — escopo por projeto |
 | `search_by_component` | Alias tipado — escopo por componente |
+| `search_by_technology` | Alias tipado — escopo por tecnologia |
 | `get_document` | Documento completo por ID |
 | `recent_documents` | Documentos recentes |
 
-Demais aliases `search_by_*` (technology/tag) ficam fora do contrato até evidência de uso.
+Demais aliases `search_by_*` (tag) ficam fora do contrato até evidência de uso.
 
 ---
 
@@ -249,18 +250,18 @@ Demais aliases `search_by_*` (technology/tag) ficam fora do contrato até evidê
 
 ## Próximo passo
 
-Sprint 30 encerrada. **Sprint 31 inicia somente após aprovação explícita.**
+Sprint 31 encerrada. **Sprint 32 inicia somente após aprovação explícita.**
 
 Para cortar/publicar release:
 
 ```bash
-./scripts/cut_release.sh          # tag local v1.14.0
+./scripts/cut_release.sh          # tag local v1.15.0
 # configurar origin, depois:
 git push -u origin HEAD && ./scripts/cut_release.sh --push
 # Actions → Windows Portable → Release assets
 ```
 
-Ver: [`docs/Sprint30.md`](docs/Sprint30.md) · [`docs/MCP.md`](docs/MCP.md) · [`docs/ReleaseGit.md`](docs/ReleaseGit.md).
+Ver: [`docs/Sprint31.md`](docs/Sprint31.md) · [`docs/MCP.md`](docs/MCP.md) · [`docs/ReleaseGit.md`](docs/ReleaseGit.md).
 
 ---
 
