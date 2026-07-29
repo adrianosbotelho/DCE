@@ -55,6 +55,11 @@ timeline
 | **1.19.0** | First publish | Pending-publisher runbook + `doctor --json` + Actions Node 24 | Maintainer OIDC upload |
 | **1.20.0** | Facets | MCP/CLI `list_facets` for discoverable `search_by_*` slugs | workspace_status / PyPI |
 | **1.21.0** | Status | MCP `workspace_status` (= doctor --json) | index --json / PyPI |
+| **1.22.0** | Ops JSON | `dce index --json` | — |
+| **1.23.0** | Doctor stats | counts_by_source + newest_indexed_at | — |
+| **1.24.0** | Tools CLI | `dce tools` | — |
+| **1.25.0** | Recent CLI | `dce recent` | — |
+| **1.26.0** | Docs | CONTRIBUTING + ProductVision hygiene | PyPI first upload |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 

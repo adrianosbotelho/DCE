@@ -12,15 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.21.0` (Sprint 37) |
-| Fase | Pós-1.0 — **Sprint 37 concluída; aguardando aprovação para Sprint 38** |
+| Versão | `1.26.0` (Sprint 42) |
+| Fase | Pós-1.0 — **Sprint 42 concluída; aguardando aprovação para Sprint 43** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
-**1.21.0:** + MCP `workspace_status` (PB-101).  
-**1.20.0:** + MCP/CLI `list_facets` (PB-100).  
-**1.19.0–1.0.0:** doctor JSON, Publish OIDC, aliases MCP, Windows, Context Builder.  
-Kiro: [`docs/Kiro.md`](docs/Kiro.md) · PyPI: [`docs/PublishPyPI.md`](docs/PublishPyPI.md).
+**1.26.0:** + CONTRIBUTING (PB-106).  
+**1.25.0–1.22.0:** `dce recent` / `tools` / doctor stats / `index --json`.  
+**1.21.0–1.0.0:** workspace_status, facets, aliases MCP, Windows Releases, Context Builder.  
+Kiro: [`docs/Kiro.md`](docs/Kiro.md) · Contribute: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ---
 
@@ -253,14 +253,14 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 
 ## Próximo passo
 
-Sprint 37 encerrada. **Sprint 38 inicia somente após aprovação explícita.**
+Sprint 42 encerrada. **Sprint 43 inicia somente após aprovação explícita.**
 
 ```bash
 ./scripts/cut_release.sh && git push origin HEAD && ./scripts/cut_release.sh --push
 # First PyPI (manual): docs/PublishPyPI.md
 ```
 
-Ver: [`docs/Sprint37.md`](docs/Sprint37.md) · [`docs/MCP.md`](docs/MCP.md).
+Ver: [`docs/Sprint42.md`](docs/Sprint42.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ---
 

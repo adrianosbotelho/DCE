@@ -1,6 +1,6 @@
 # Product Vision — Dev Context Engine (DCE)
 
-**Status:** Aprovado para documentação (Fase 1–5) · **Código:** não iniciado  
+**Status:** Produto estável (`1.26.0+`) · Context Builder + MCP Kiro  
 **Última atualização:** 2026-07-29
 
 ---

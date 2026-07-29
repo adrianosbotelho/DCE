@@ -20,12 +20,14 @@ dce index . --source jira_import  # após dropar JSON/CSV em imports/jira
 # 3. Validar saúde / descobrir slugs
 dce doctor .
 dce doctor . --json
-dce facets .
 dce facets . --json
+dce tools --json
+dce index . --json
 
 # 4. Consultar
 dce build "ORA-12541"
 dce search "listener"
+dce recent --path . --format table
 dce show <document_id>
 
 # 5. Servir o Kiro (stdio — não misturar prosa no stdout)

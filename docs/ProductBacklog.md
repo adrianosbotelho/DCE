@@ -107,6 +107,11 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-099 | First-publish runbook + doctor JSON + Actions Node 24 | P1 | Should | S | E10 | ✅ Sprint 35 |
 | PB-100 | MCP/CLI `list_facets` (discover search_by_* slugs) | P1 | Should | S | E4 | ✅ Sprint 36 |
 | PB-101 | MCP `workspace_status` (doctor via MCP) | P1 | Should | XS | E4 | ✅ Sprint 37 |
+| PB-102 | `dce index --json` | P2 | Could | XS | E10 | ✅ Sprint 38 |
+| PB-103 | Doctor index stats (`counts_by_source`, newest) | P2 | Could | XS | E10 | ✅ Sprint 39 |
+| PB-104 | CLI `dce tools` | P2 | Could | XS | E4 | ✅ Sprint 40 |
+| PB-105 | CLI `dce recent` | P2 | Could | XS | E4 | ✅ Sprint 41 |
+| PB-106 | CONTRIBUTING + ProductVision hygiene | P3 | Could | XS | — | ✅ Sprint 42 |
 
 ---
 
@@ -149,7 +154,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 37 concluída tecnicamente (`1.21.0`).  
-PB-101 (`workspace_status`).  
-Próxima: Sprint 38 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint37.md`](Sprint37.md) · [`MCP.md`](MCP.md).
+Sprint 42 concluída tecnicamente (`1.26.0`).  
+PB-102…106 (index JSON, doctor stats, tools, recent, CONTRIBUTING).  
+Próxima: Sprint 43 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint42.md`](Sprint42.md) · [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
