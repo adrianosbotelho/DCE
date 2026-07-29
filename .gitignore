@@ -1,0 +1,36 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.spec.bak
+packaging/pyinstaller/*.toc
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.env
+.env.*
+
+# DCE local workspace data
+.dce/
+*.sqlite
+*.sqlite3
+*.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Imports sensíveis locais
+imports/

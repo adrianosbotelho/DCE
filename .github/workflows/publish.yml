@@ -1,0 +1,55 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "PyPI target"
+        required: true
+        default: "pypi"
+        type: choice
+        options:
+          - pypi
+          - testpypi
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install build tools
+        run: pip install build twine
+      - name: Build
+        run: |
+          rm -rf dist
+          python -m build
+          twine check dist/*
+      - name: Publish to PyPI
+        if: ${{ inputs.target == 'pypi' }}
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          if [ -z "${TWINE_PASSWORD}" ]; then
+            echo "Missing secrets.PYPI_TOKEN — configure the repo secret, then re-run."
+            exit 1
+          fi
+          twine upload --non-interactive dist/*
+      - name: Publish to TestPyPI
+        if: ${{ inputs.target == 'testpypi' }}
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+        run: |
+          if [ -z "${TWINE_PASSWORD}" ]; then
+            echo "Missing secrets.TEST_PYPI_TOKEN — configure the repo secret, then re-run."
+            exit 1
+          fi
+          twine upload --repository testpypi --non-interactive dist/*

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "document_count": 500,
+  "iterations": 30,
+  "query_text": "ORA-12541",
+  "build_context": {
+    "n": 30,
+    "p50_ms": 1.6257499810308218,
+    "p95_ms": 1.9345409236848354,
+    "p99_ms": 1.9989999709650874,
+    "max_ms": 1.9989999709650874,
+    "mean_ms": 1.6904819950771828
+  },
+  "search_context": {
+    "n": 30,
+    "p50_ms": 0.33720897044986486,
+    "p95_ms": 0.38937502540647984,
+    "p99_ms": 0.449958024546504,
+    "max_ms": 0.449958024546504,
+    "mean_ms": 0.3491638965594272
+  },
+  "get_document": {
+    "n": 30,
+    "p50_ms": 0.013958080671727657,
+    "p95_ms": 0.017417012713849545,
+    "p99_ms": 0.028125010430812836,
+    "max_ms": 0.028125010430812836,
+    "mean_ms": 0.015279111297180256
+  },
+  "slo": {
+    "build_context_p95_ms": 500.0,
+    "search_context_p95_ms": 200.0,
+    "get_document_p95_ms": 50.0
+  },
+  "within_slo": {
+    "build_context": true,
+    "search_context": true,
+    "get_document": true
+  },
+  "notes": [
+    "Synthetic corpus — directional only vs Architecture 10k-doc SLO.",
+    "CI should not hard-fail on within_slo (host variance).",
+    "seeded 500 synthetic documents"
+  ]
+}
