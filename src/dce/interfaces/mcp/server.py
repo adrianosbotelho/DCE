@@ -21,6 +21,7 @@ from dce.infrastructure.storage.repository import SqliteDocumentRepository
 from dce.infrastructure.storage.workspace import (
     anchor_patterns_from_config,
     budget_from_config,
+    doctor_workspace,
     load_workspace,
     synonyms_from_config,
 )
@@ -29,6 +30,7 @@ from dce.interfaces.mcp.schemas import (
     ListFacetsResult,
     RecentDocumentsResult,
     SearchContextResult,
+    WorkspaceStatusResult,
 )
 
 
@@ -115,6 +117,7 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
             "Use search_by_technology to scope hits to one technology slug. "
             "Use search_by_tag to scope hits to one tag. "
             "Use list_facets to discover project/component/technology/tag slugs. "
+            "Use workspace_status to verify index/MCP health before heavy queries. "
             "Use get_document / recent_documents for direct lookups. "
             "All responses are structured JSON with schema_version."
         ),
@@ -418,6 +421,15 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
             repository = SqliteDocumentRepository(conn)
             facets = repository.list_facets()
         return ListFacetsResult(facets=facets)
+
+    @server.tool()
+    def workspace_status() -> WorkspaceStatusResult:
+        """Return workspace health checks (same shape as ``dce doctor --json``).
+
+        Prefer calling this before build_context when the index may be empty or stale.
+        """
+        report = doctor_workspace(root)
+        return WorkspaceStatusResult.from_doctor_report(report)
 
     @server.tool()
     def get_document(document_id: str) -> GetDocumentResult:

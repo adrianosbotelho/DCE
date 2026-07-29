@@ -54,6 +54,7 @@ timeline
 | **1.18.0** | Release path | CI format green + Publish Trusted Publisher (OIDC) | First PyPI upload |
 | **1.19.0** | First publish | Pending-publisher runbook + `doctor --json` + Actions Node 24 | Maintainer OIDC upload |
 | **1.20.0** | Facets | MCP/CLI `list_facets` for discoverable `search_by_*` slugs | workspace_status / PyPI |
+| **1.21.0** | Status | MCP `workspace_status` (= doctor --json) | index --json / PyPI |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 

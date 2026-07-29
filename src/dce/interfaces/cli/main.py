@@ -133,20 +133,9 @@ def doctor_cmd(
     """Check config, database, schema, FTS5, index size, MCP readiness, git hook."""
     report = doctor_workspace(path)
     if as_json:
-        from dce.interfaces.mcp.contract import PRIMARY_TOOL, STABLE_TOOLS
+        from dce.interfaces.mcp.schemas import WorkspaceStatusResult
 
-        _print_json(
-            {
-                "schema_version": "1",
-                "healthy": report.healthy,
-                "workspace_root": str(report.workspace_root),
-                "checks": [{"name": c.name, "ok": c.ok, "detail": c.detail} for c in report.checks],
-                "mcp": {
-                    "primary_tool": PRIMARY_TOOL,
-                    "stable_tools": sorted(STABLE_TOOLS),
-                },
-            }
-        )
+        _print_json(WorkspaceStatusResult.from_doctor_report(report).model_dump(mode="json"))
     else:
         table = Table(title="dce doctor")
         table.add_column("Check")

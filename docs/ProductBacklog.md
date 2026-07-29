@@ -106,6 +106,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-098 | CI format fix + PyPI Trusted Publisher workflow | P1 | Should | S | E10 | ✅ Sprint 34 |
 | PB-099 | First-publish runbook + doctor JSON + Actions Node 24 | P1 | Should | S | E10 | ✅ Sprint 35 |
 | PB-100 | MCP/CLI `list_facets` (discover search_by_* slugs) | P1 | Should | S | E4 | ✅ Sprint 36 |
+| PB-101 | MCP `workspace_status` (doctor via MCP) | P1 | Should | XS | E4 | ✅ Sprint 37 |
 
 ---
 
@@ -148,7 +149,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 36 concluída tecnicamente (`1.20.0`).  
-PB-100 (`list_facets` / `dce facets`).  
-Próxima: Sprint 37 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint36.md`](Sprint36.md) · [`MCP.md`](MCP.md).
+Sprint 37 concluída tecnicamente (`1.21.0`).  
+PB-101 (`workspace_status`).  
+Próxima: Sprint 38 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint37.md`](Sprint37.md) · [`MCP.md`](MCP.md).

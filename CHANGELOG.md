@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.20.0).
+- Nothing yet (post 1.21.0).
+
+## [1.21.0] - 2026-07-29
+
+### Added
+
+- PB-101: MCP tool `workspace_status` — same payload as `dce doctor --json` (healthy, checks, MCP tool inventory).
+
+### Changed
+
+- `dce doctor --json` now serializes via shared `WorkspaceStatusResult` schema.
 
 ## [1.20.0] - 2026-07-29
 
@@ -367,7 +377,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.20.0...HEAD
+[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.21.0...HEAD
+[1.21.0]: https://github.com/adrianosbotelho/DCE/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/adrianosbotelho/DCE/compare/v1.19.0...v1.20.0
 [1.19.0]: https://github.com/adrianosbotelho/DCE/compare/v1.18.0...v1.19.0
 [1.18.0]: https://github.com/adrianosbotelho/DCE/compare/v1.17.0...v1.18.0

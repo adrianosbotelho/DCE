@@ -324,6 +324,25 @@ def test_mcp_list_facets_discovers_slugs(tmp_path: Path) -> None:
     assert "markdown" in source_types
 
 
+def test_mcp_workspace_status_healthy(tmp_path: Path) -> None:
+    root = tmp_path / "ws"
+    _seed(root)
+    server = create_mcp_server(root)
+    result = _call(server, "workspace_status", {})
+    assert result.is_error is False
+    payload = result.structured_content
+    assert payload["schema_version"] == MCP_SCHEMA_VERSION
+    assert payload["healthy"] is True
+    assert payload["mcp"]["primary_tool"] == PRIMARY_TOOL
+    assert "build_context" in payload["mcp"]["stable_tools"]
+    assert "workspace_status" in payload["mcp"]["stable_tools"]
+    names = {item["name"] for item in payload["checks"]}
+    assert {"config", "database", "fts5", "schema", "documents", "mcp"} <= names
+    docs = next(item for item in payload["checks"] if item["name"] == "documents")
+    assert docs["ok"] is True
+    assert "indexed documents" in docs["detail"]
+
+
 def test_cli_mcp_requires_workspace(tmp_path: Path) -> None:
     result = runner.invoke(app, ["mcp", "--path", str(tmp_path / "missing")])
     assert result.exit_code == 1
