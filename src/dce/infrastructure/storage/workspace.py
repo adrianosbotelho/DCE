@@ -157,6 +157,9 @@ class DoctorReport:
 
     workspace_root: Path
     checks: list[DoctorCheck] = field(default_factory=list)
+    document_count: int = 0
+    counts_by_source: dict[str, int] = field(default_factory=dict)
+    newest_indexed_at: str | None = None
 
     @property
     def healthy(self) -> bool:
@@ -298,12 +301,37 @@ def doctor_workspace(workspace_root: Path) -> DoctorReport:
             report.checks.append(DoctorCheck(name="schema", ok=schema_ok, detail=detail))
             count_row = conn.execute("SELECT COUNT(*) AS n FROM documents").fetchone()
             doc_count = int(count_row["n"]) if count_row is not None else 0
+            report.document_count = doc_count
+            source_rows = conn.execute(
+                """
+                SELECT source_type, COUNT(*) AS n
+                FROM documents
+                GROUP BY source_type
+                ORDER BY n DESC, source_type ASC
+                """
+            ).fetchall()
+            report.counts_by_source = {
+                str(row["source_type"]): int(row["n"]) for row in source_rows
+            }
+            newest = conn.execute(
+                """
+                SELECT MAX(COALESCE(indexed_at, updated_at)) AS newest
+                FROM documents
+                """
+            ).fetchone()
+            if newest is not None and newest["newest"]:
+                report.newest_indexed_at = str(newest["newest"])
             docs_detail = (
                 f"{doc_count} indexed documents"
                 if doc_count
                 else "0 documents — run `dce index` before MCP use"
             )
             report.checks.append(DoctorCheck(name="documents", ok=True, detail=docs_detail))
+            if report.counts_by_source:
+                by_source = ", ".join(
+                    f"{name}={count}" for name, count in report.counts_by_source.items()
+                )
+                report.checks.append(DoctorCheck(name="sources", ok=True, detail=by_source))
     except OSError as exc:
         report.checks.append(DoctorCheck(name="database", ok=False, detail=str(exc)))
 

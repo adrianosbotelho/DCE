@@ -51,6 +51,9 @@ def test_doctor_healthy_after_init(tmp_path: Path) -> None:
     docs = next(c for c in report.checks if c.name == "documents")
     assert docs.ok is True
     assert "0 documents" in docs.detail
+    assert report.document_count == 0
+    assert report.counts_by_source == {}
+    assert report.newest_indexed_at is None
     mcp = next(c for c in report.checks if c.name == "mcp")
     assert mcp.ok is True
     assert "build_context" in mcp.detail

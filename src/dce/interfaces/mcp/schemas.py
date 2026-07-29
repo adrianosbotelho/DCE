@@ -60,6 +60,9 @@ class WorkspaceStatusResult(BaseModel):
     workspace_root: str
     checks: list[StatusCheck] = Field(default_factory=list)
     mcp: McpToolInfo
+    document_count: int = 0
+    counts_by_source: dict[str, int] = Field(default_factory=dict)
+    newest_indexed_at: str | None = None
 
     @classmethod
     def from_doctor_report(cls, report: DoctorReport) -> WorkspaceStatusResult:
@@ -75,6 +78,9 @@ class WorkspaceStatusResult(BaseModel):
                 primary_tool=PRIMARY_TOOL,
                 stable_tools=sorted(STABLE_TOOLS),
             ),
+            document_count=report.document_count,
+            counts_by_source=dict(report.counts_by_source),
+            newest_indexed_at=report.newest_indexed_at,
         )
 
 

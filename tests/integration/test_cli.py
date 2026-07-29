@@ -83,6 +83,9 @@ def test_cli_doctor_json(tmp_path: Path) -> None:
     assert payload["healthy"] is True
     assert payload["mcp"]["primary_tool"] == "build_context"
     assert "search_by_tag" in payload["mcp"]["stable_tools"]
+    assert payload["document_count"] == 0
+    assert payload["counts_by_source"] == {}
+    assert payload["newest_indexed_at"] is None
     names = {item["name"] for item in payload["checks"]}
     assert {"config", "database", "fts5", "schema", "documents", "mcp"} <= names
 
