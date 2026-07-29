@@ -47,7 +47,13 @@ def test_doctor_healthy_after_init(tmp_path: Path) -> None:
     report = doctor_workspace(root)
     assert report.healthy is True
     names = {c.name for c in report.checks}
-    assert names == {"config", "database", "fts5", "schema"}
+    assert names == {"config", "database", "fts5", "schema", "documents", "mcp"}
+    docs = next(c for c in report.checks if c.name == "documents")
+    assert docs.ok is True
+    assert "0 documents" in docs.detail
+    mcp = next(c for c in report.checks if c.name == "mcp")
+    assert mcp.ok is True
+    assert "build_context" in mcp.detail
 
 
 def test_doctor_missing_config(tmp_path: Path) -> None:

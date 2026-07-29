@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "dev-context-engine"
-version = "1.16.0"
+version = "1.17.0"
 description = "Dev Context Engine — offline context builder for AI coding agents"
 readme = "README.md"
 license = "MIT"
@@ -46,11 +46,11 @@ portable = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/adrianobotelho/DCE"
-Documentation = "https://github.com/adrianobotelho/DCE/blob/main/docs/MCP.md"
-Repository = "https://github.com/adrianobotelho/DCE"
-Changelog = "https://github.com/adrianobotelho/DCE/blob/main/CHANGELOG.md"
-Packaging = "https://github.com/adrianobotelho/DCE/blob/main/docs/Packaging.md"
+Homepage = "https://github.com/adrianosbotelho/DCE"
+Documentation = "https://github.com/adrianosbotelho/DCE/blob/main/docs/MCP.md"
+Repository = "https://github.com/adrianosbotelho/DCE"
+Changelog = "https://github.com/adrianosbotelho/DCE/blob/main/CHANGELOG.md"
+Packaging = "https://github.com/adrianosbotelho/DCE/blob/main/docs/Packaging.md"
 
 [project.scripts]
 dce = "dce.interfaces.cli.main:app"

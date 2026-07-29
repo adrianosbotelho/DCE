@@ -2,7 +2,7 @@
 
 **Sprint:** 32  
 **Release alvo:** 1.16.0  
-**Status:** ✅ Concluída (aguardando aprovação para Sprint 33)  
+**Status:** ✅ Concluída  
 **Última atualização:** 2026-07-29
 
 ---

@@ -25,6 +25,8 @@ git commit -m "chore: initial import of Dev Context Engine"
 Optional push (requires `origin`):
 
 ```bash
+./scripts/bootstrap_github.sh              # create adrianosbotelho/DCE + push HEAD + tag
+# or manually:
 git remote add origin git@github.com:OWNER/DCE.git   # once
 git push -u origin HEAD
 ./scripts/cut_release.sh --push

@@ -102,6 +102,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-094 | Windows portable `dce.exe` (ZIP) | P2 | Could | M | E10 | ✅ Sprint 26 |
 | PB-095 | GitHub Release assets (ZIP + SHA-256) | P2 | Could | S | E10 | ✅ Sprint 27 |
 | PB-096 | Git bootstrap + cut-release script | P1 | Should | S | E10 | ✅ Sprint 28 |
+| PB-097 | Kiro adoption readiness (doctor/MCP + GitHub bootstrap) | P1 | Should | S | E4/E10 | ✅ Sprint 33 |
 
 ---
 
@@ -144,7 +145,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 32 concluída tecnicamente (`1.16.0`).  
-PB-074 (`search_by_tag`) — série `search_by_*` completa.  
-Próxima: Sprint 33 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint32.md`](Sprint32.md) · [`MCP.md`](MCP.md).
+Sprint 33 concluída tecnicamente (`1.17.0`).  
+PB-097 (doctor MCP/index + Kiro.md + GitHub bootstrap).  
+Próxima: Sprint 34 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint33.md`](Sprint33.md) · [`Kiro.md`](Kiro.md).

@@ -12,15 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.16.0` (Sprint 32) |
-| Fase | Pós-1.0 — **Sprint 32 concluída; aguardando aprovação para Sprint 33** |
+| Versão | `1.17.0` (Sprint 33) |
+| Fase | Pós-1.0 — **Sprint 33 concluída; aguardando aprovação para Sprint 34** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
+**1.17.0:** + Doctor MCP/index + guia Kiro + bootstrap GitHub (PB-097).  
 **1.16.0:** + MCP `search_by_tag` (PB-074) — série `search_by_*` completa.  
-**1.15.0:** + MCP `search_by_technology` (PB-073).  
-**1.14.0–1.0.0:** Demais aliases MCP, Git cut-release, Windows, Context Builder.  
-Windows: [`docs/Windows.md`](docs/Windows.md) · Git: [`docs/ReleaseGit.md`](docs/ReleaseGit.md) · PyPI: `./scripts/publish.sh --upload`.
+**1.15.0–1.0.0:** Aliases MCP, Git cut-release, Windows, Context Builder.  
+Kiro: [`docs/Kiro.md`](docs/Kiro.md) · Windows: [`docs/Windows.md`](docs/Windows.md) · Git: [`docs/ReleaseGit.md`](docs/ReleaseGit.md).
 
 ---
 
@@ -92,6 +92,7 @@ retrieval:
 
 ### Kiro / MCP
 
+Adoção rápida: [`docs/Kiro.md`](docs/Kiro.md).  
 Contrato normativo: [`docs/MCP.md`](docs/MCP.md) (`schema_version: "1"`).
 
 ```bash
@@ -178,6 +179,7 @@ Detalhes: [`docs/Architecture.md`](docs/Architecture.md).
 
 | Documento | Conteúdo |
 |-----------|----------|
+| [Kiro adoption](docs/Kiro.md) | Setup rápido no Kiro |
 | [MCP Contract](docs/MCP.md) | Contrato MCP schema_version 1 (Kiro) |
 | [Packaging](docs/Packaging.md) | Build, smoke e publish PyPI |
 | [Windows portable](docs/Windows.md) | `dce.exe` ZIP para Windows / Kiro |
@@ -249,18 +251,17 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 
 ## Próximo passo
 
-Sprint 32 encerrada. **Sprint 33 inicia somente após aprovação explícita.**
+Sprint 33 encerrada. **Sprint 34 inicia somente após aprovação explícita.**
 
 Para cortar/publicar release:
 
 ```bash
-./scripts/cut_release.sh          # tag local v1.16.0
-# configurar origin, depois:
-git push -u origin HEAD && ./scripts/cut_release.sh --push
+./scripts/cut_release.sh
+./scripts/bootstrap_github.sh     # cria origin + push HEAD + tag
 # Actions → Windows Portable → Release assets
 ```
 
-Ver: [`docs/Sprint32.md`](docs/Sprint32.md) · [`docs/MCP.md`](docs/MCP.md) · [`docs/ReleaseGit.md`](docs/ReleaseGit.md).
+Ver: [`docs/Sprint33.md`](docs/Sprint33.md) · [`docs/Kiro.md`](docs/Kiro.md) · [`docs/ReleaseGit.md`](docs/ReleaseGit.md).
 
 ---
 

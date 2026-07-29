@@ -296,8 +296,28 @@ def doctor_workspace(workspace_root: Path) -> DoctorReport:
                 else (f"version {version}, expected {CURRENT_SCHEMA_VERSION} — run `dce init`")
             )
             report.checks.append(DoctorCheck(name="schema", ok=schema_ok, detail=detail))
+            count_row = conn.execute("SELECT COUNT(*) AS n FROM documents").fetchone()
+            doc_count = int(count_row["n"]) if count_row is not None else 0
+            docs_detail = (
+                f"{doc_count} indexed documents"
+                if doc_count
+                else "0 documents — run `dce index` before MCP use"
+            )
+            report.checks.append(
+                DoctorCheck(name="documents", ok=True, detail=docs_detail)
+            )
     except OSError as exc:
         report.checks.append(DoctorCheck(name="database", ok=False, detail=str(exc)))
+
+    from dce.interfaces.mcp.contract import PRIMARY_TOOL, STABLE_TOOLS
+
+    report.checks.append(
+        DoctorCheck(
+            name="mcp",
+            ok=True,
+            detail=f"{len(STABLE_TOOLS)} stable tools; prefer {PRIMARY_TOOL}",
+        )
+    )
 
     from dce.infrastructure.hooks import get_hook_status
 

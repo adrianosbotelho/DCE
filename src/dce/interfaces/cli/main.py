@@ -126,7 +126,7 @@ def doctor_cmd(
         typer.Argument(help="Workspace directory containing dce.yaml."),
     ] = Path("."),
 ) -> None:
-    """Check config, database, schema version, FTS5, and optional git hook."""
+    """Check config, database, schema, FTS5, index size, MCP readiness, git hook."""
     report = doctor_workspace(path)
     table = Table(title="dce doctor")
     table.add_column("Check")
