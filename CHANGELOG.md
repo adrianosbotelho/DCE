@@ -9,7 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.17.0).
+- Nothing yet (post 1.18.0).
+
+## [1.18.0] - 2026-07-29
+
+### Fixed
+
+- CI: apply `ruff format` so `ruff format --check` passes on GitHub Actions.
+
+### Changed
+
+- PB-098: Publish workflow uses `pypa/gh-action-pypi-publish` Trusted Publisher (OIDC).
+
+### Added
+
+- Docs: [`docs/ReleaseVerify.md`](docs/ReleaseVerify.md); Packaging updated for OIDC publish path.
 
 ## [1.17.0] - 2026-07-29
 
@@ -331,7 +345,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.17.0...HEAD
+[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.18.0...HEAD
+[1.18.0]: https://github.com/adrianosbotelho/DCE/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/adrianosbotelho/DCE/compare/v1.16.0...v1.17.0
 [1.16.0]: https://github.com/adrianosbotelho/DCE/compare/v1.15.0...v1.16.0
 [1.15.0]: https://github.com/adrianosbotelho/DCE/compare/v1.14.0...v1.15.0

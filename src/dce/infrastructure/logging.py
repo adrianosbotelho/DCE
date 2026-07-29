@@ -111,9 +111,7 @@ def configure_logging(
     if resolved_format == "json":
         handler.setFormatter(JsonLogFormatter())
     else:
-        handler.setFormatter(
-            logging.Formatter("%(asctime)s %(levelname)s [%(name)s] %(message)s")
-        )
+        handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s [%(name)s] %(message)s"))
 
     root = logging.getLogger("dce")
     root.handlers.clear()

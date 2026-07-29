@@ -303,9 +303,7 @@ def doctor_workspace(workspace_root: Path) -> DoctorReport:
                 if doc_count
                 else "0 documents — run `dce index` before MCP use"
             )
-            report.checks.append(
-                DoctorCheck(name="documents", ok=True, detail=docs_detail)
-            )
+            report.checks.append(DoctorCheck(name="documents", ok=True, detail=docs_detail))
     except OSError as exc:
         report.checks.append(DoctorCheck(name="database", ok=False, detail=str(exc)))
 
@@ -323,9 +321,7 @@ def doctor_workspace(workspace_root: Path) -> DoctorReport:
 
     hook = get_hook_status(root)
     if hook.repo_root is not None:
-        report.checks.append(
-            DoctorCheck(name="git_hook", ok=True, detail=hook.detail)
-        )
+        report.checks.append(DoctorCheck(name="git_hook", ok=True, detail=hook.detail))
 
     return report
 

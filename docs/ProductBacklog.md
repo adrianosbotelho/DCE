@@ -103,6 +103,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-095 | GitHub Release assets (ZIP + SHA-256) | P2 | Could | S | E10 | ✅ Sprint 27 |
 | PB-096 | Git bootstrap + cut-release script | P1 | Should | S | E10 | ✅ Sprint 28 |
 | PB-097 | Kiro adoption readiness (doctor/MCP + GitHub bootstrap) | P1 | Should | S | E4/E10 | ✅ Sprint 33 |
+| PB-098 | CI format fix + PyPI Trusted Publisher workflow | P1 | Should | S | E10 | ✅ Sprint 34 |
 
 ---
 
@@ -145,7 +146,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 33 concluída tecnicamente (`1.17.0`).  
-PB-097 (doctor MCP/index + Kiro.md + GitHub bootstrap).  
-Próxima: Sprint 34 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint33.md`](Sprint33.md) · [`Kiro.md`](Kiro.md).
+Sprint 34 concluída tecnicamente (`1.18.0`).  
+PB-098 (CI format + Publish OIDC).  
+Próxima: Sprint 35 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint34.md`](Sprint34.md) · [`ReleaseVerify.md`](ReleaseVerify.md).

@@ -99,10 +99,7 @@ def install_post_commit_hook(workspace_root: Path, *, force: bool = False) -> Pa
     if path.is_file():
         existing = path.read_text(encoding="utf-8", errors="replace")
         if HOOK_MARKER not in existing and not force:
-            msg = (
-                f"Refusing to overwrite foreign hook at {path}. "
-                "Re-run with --force to replace."
-            )
+            msg = f"Refusing to overwrite foreign hook at {path}. Re-run with --force to replace."
             raise WorkspaceError(msg)
 
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -119,8 +116,7 @@ def uninstall_post_commit_hook(workspace_root: Path, *, force: bool = False) -> 
         return None
     if not status.managed and not force:
         msg = (
-            f"Refusing to remove foreign hook at {status.hook_path}. "
-            "Re-run with --force to delete."
+            f"Refusing to remove foreign hook at {status.hook_path}. Re-run with --force to delete."
         )
         raise WorkspaceError(msg)
     status.hook_path.unlink(missing_ok=True)

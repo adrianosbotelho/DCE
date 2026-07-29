@@ -127,8 +127,7 @@ class JiraRestIndexer:
         credentials = resolve_jira_credentials(base_url=base_url)
         if credentials is None:
             logger.warning(
-                "jira_rest skipped — set JIRA_BASE_URL and "
-                "JIRA_EMAIL+JIRA_API_TOKEN or JIRA_PAT"
+                "jira_rest skipped — set JIRA_BASE_URL and JIRA_EMAIL+JIRA_API_TOKEN or JIRA_PAT"
             )
             return
 

@@ -76,9 +76,7 @@ class IncidentIndexer:
 
         summary = optional_str(frontmatter.get("summary"))
         if not summary:
-            summary = (
-                f"{title} — {resolution}"[:240] if resolution else body.strip()[:240]
-            )
+            summary = f"{title} — {resolution}"[:240] if resolution else body.strip()[:240]
 
         metadata: dict[str, Any] = {
             "content_hash": content_hash(item.text),

@@ -26,9 +26,7 @@ def test_windows_doc_mentions_kiro_and_zip() -> None:
 
 
 def test_windows_workflow_publishes_release_on_tags() -> None:
-    text = (ROOT / ".github" / "workflows" / "windows-portable.yml").read_text(
-        encoding="utf-8"
-    )
+    text = (ROOT / ".github" / "workflows" / "windows-portable.yml").read_text(encoding="utf-8")
     assert "softprops/action-gh-release" in text
     assert "refs/tags/" in text
     assert ".sha256" in text

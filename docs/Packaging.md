@@ -1,8 +1,8 @@
 # Packaging — Dev Context Engine (DCE)
 
-**Status:** Ready to publish (upload gated by maintainer)  
-**Release:** `1.10.0` (stable); packaging desde `0.9.0a1`  
-**Backlog:** PB-090 (wheel) · PB-094 (Windows portable ZIP)
+**Status:** Ready to publish (upload gated by Trusted Publisher / token)  
+**Release:** `1.18.0`  
+**Backlog:** PB-090 (wheel) · PB-094 (Windows ZIP) · PB-098 (publish OIDC)
 
 ---
 
@@ -29,15 +29,35 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 
-rm -rf dist/
-python -m build
-twine check dist/*
+./scripts/publish.sh              # build + twine check (sem upload)
 ```
 
 Artefatos esperados em `dist/`:
 
 - `dev_context_engine-<version>.tar.gz` (sdist)
 - `dev_context_engine-<version>-py3-none-any.whl` (wheel)
+
+---
+
+## Publicar (recomendado — Trusted Publisher)
+
+1. Em [pypi.org](https://pypi.org) → projeto `dev-context-engine` → **Publishing** → adicionar Trusted Publisher:
+   - Owner: `adrianosbotelho`
+   - Repository: `DCE`
+   - Workflow name: `publish.yml`
+   - Environment name: `pypi`
+2. No GitHub: criar environment `pypi` (Settings → Environments).
+3. Actions → **Publish** → Run workflow → target `pypi` ou `testpypi`.
+
+Ver também [`ReleaseVerify.md`](ReleaseVerify.md).
+
+### Fallback com token local
+
+```bash
+export PYPI_TOKEN=pypi-...
+./scripts/publish.sh --upload     # PyPI
+./scripts/publish.sh --testpypi   # TestPyPI
+```
 
 ---
 
@@ -52,44 +72,22 @@ python -m venv /tmp/dce-smoke
 
 ---
 
-## Publicar RC / 1.x (manual — maintainer)
+## Windows portable ZIP
 
-```bash
-./scripts/publish.sh              # build + twine check
-export PYPI_TOKEN=pypi-...
-./scripts/publish.sh --upload     # PyPI
-./scripts/publish.sh --testpypi   # TestPyPI
-```
+Ver [`Windows.md`](Windows.md) · [`ReleaseWindows.md`](ReleaseWindows.md).
 
-Ou GitHub Actions → workflow **Publish** (`workflow_dispatch`) com secret `PYPI_TOKEN` / `TEST_PYPI_TOKEN`.
-
-Gates 1.0: [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
-
----
-
-## Windows portable ZIP (PB-094)
-
-Ver guia completo: [`Windows.md`](Windows.md).
-
-```powershell
-# Em máquina Windows / CI windows-latest
-.\scripts\build_windows_portable.ps1
-# → dist\dce-<version>-windows-x64.zip
-```
-
-GitHub Actions → workflow **Windows Portable** (`workflow_dispatch` ou tag `v*`).  
-Em tags, o ZIP + `.sha256` vão para **GitHub Release** — ver [`ReleaseWindows.md`](ReleaseWindows.md).
+Tags `v*` publicam ZIP + `.sha256` no GitHub Release.
 
 ---
 
 ## Hatch / layout
 
 - Código em `src/dce/`
-- Wheel inclui apenas o pacote `dce` (sem `force-include` duplicado)
+- Wheel inclui apenas o pacote `dce`
 - `py.typed` presente → typed package
 
 ---
 
 ## CI
 
-Workflow `.github/workflows/ci.yml` executa build + `twine check` + smoke do wheel além de ruff/mypy/pytest.
+`.github/workflows/ci.yml` executa ruff (check + format), mypy, pytest, build, twine check e smoke do wheel.

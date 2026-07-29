@@ -1,5 +1,9 @@
 name: Publish
 
+# Uses PyPI Trusted Publisher (OIDC). One-time setup on pypi.org:
+#   owner=adrianosbotelho  repo=DCE  workflow=publish.yml  environment=pypi
+# Local / token fallback remains: ./scripts/publish.sh --upload (PYPI_TOKEN).
+
 on:
   workflow_dispatch:
     inputs:
@@ -33,23 +37,9 @@ jobs:
           twine check dist/*
       - name: Publish to PyPI
         if: ${{ inputs.target == 'pypi' }}
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-        run: |
-          if [ -z "${TWINE_PASSWORD}" ]; then
-            echo "Missing secrets.PYPI_TOKEN — configure the repo secret, then re-run."
-            exit 1
-          fi
-          twine upload --non-interactive dist/*
+        uses: pypa/gh-action-pypi-publish@release/v1
       - name: Publish to TestPyPI
         if: ${{ inputs.target == 'testpypi' }}
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: |
-          if [ -z "${TWINE_PASSWORD}" ]; then
-            echo "Missing secrets.TEST_PYPI_TOKEN — configure the repo secret, then re-run."
-            exit 1
-          fi
-          twine upload --repository testpypi --non-interactive dist/*
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

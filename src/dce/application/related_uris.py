@@ -170,9 +170,7 @@ def link_related_uris(repository: DocumentRepository) -> int:
         if desired != normalize_related_uris(doc.related_uris):
             updates.append(doc.model_copy(update={"related_uris": desired}))
 
-    jira_by_key = {
-        str(doc.metadata.get("key") or doc.uri).upper(): doc for doc in jira_docs
-    }
+    jira_by_key = {str(doc.metadata.get("key") or doc.uri).upper(): doc for doc in jira_docs}
     for key, doc in jira_by_key.items():
         matching = commits_by_issue.get(key, [])
         commit_links = [commit_uri(str(c.metadata.get("sha") or c.uri)) for c in matching]
