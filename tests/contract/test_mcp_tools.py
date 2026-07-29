@@ -25,7 +25,8 @@ def _seed(workspace: Path) -> None:
     docs = workspace / "docs"
     docs.mkdir()
     (docs / "oracle.md").write_text(
-        "---\ntitle: Oracle listener\ntags: [oracle]\nproject: payments\n---\n\n"
+        "---\ntitle: Oracle listener\ntags: [oracle]\nproject: payments\n"
+        "component: listener\n---\n\n"
         "Fix ORA-12541 by checking listener status.\n",
         encoding="utf-8",
     )
@@ -209,6 +210,35 @@ def test_mcp_search_by_project_empty_slug(tmp_path: Path) -> None:
     _seed(root)
     server = create_mcp_server(root)
     result = _call(server, "search_by_project", {"project": "project:", "limit": 10})
+    assert result.is_error is False
+    payload = result.structured_content
+    assert payload["schema_version"] == MCP_SCHEMA_VERSION
+    assert payload["documents"] == []
+
+
+def test_mcp_search_by_component_scopes_hits(tmp_path: Path) -> None:
+    root = tmp_path / "ws"
+    _seed(root)
+    server = create_mcp_server(root)
+    result = _call(
+        server,
+        "search_by_component",
+        {"component": "component:listener", "text": "ORA-12541", "limit": 10},
+    )
+    assert result.is_error is False
+    payload = result.structured_content
+    assert payload["schema_version"] == MCP_SCHEMA_VERSION
+    assert len(payload["documents"]) >= 1
+    assert all(item["document"]["component"] == "listener" for item in payload["documents"])
+    titles = {item["document"]["title"] for item in payload["documents"]}
+    assert "Oracle listener" in titles
+
+
+def test_mcp_search_by_component_empty_slug(tmp_path: Path) -> None:
+    root = tmp_path / "ws"
+    _seed(root)
+    server = create_mcp_server(root)
+    result = _call(server, "search_by_component", {"component": "component:", "limit": 10})
     assert result.is_error is False
     payload = result.structured_content
     assert payload["schema_version"] == MCP_SCHEMA_VERSION

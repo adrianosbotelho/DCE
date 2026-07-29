@@ -47,6 +47,7 @@ timeline
 | **1.11.0** | Win release | ZIP + SHA-256 as GitHub Release assets on `v*` tags | Signed binary / MSI |
 | **1.12.0** | Git release | Repo bootstrap + `cut_release.sh` SemVer tags | Push/remote + PyPI upload |
 | **1.13.0** | MCP alias | `search_by_project` (additive schema_version 1) | `search_by_component/technology/tag` |
+| **1.14.0** | MCP alias | `search_by_component` (additive schema_version 1) | `search_by_technology/tag` |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 

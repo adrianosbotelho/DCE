@@ -17,6 +17,7 @@ STABLE_TOOLS: Final[frozenset[str]] = frozenset(
         "search_memory",
         "search_by_issue",
         "search_by_project",
+        "search_by_component",
     }
 )
 

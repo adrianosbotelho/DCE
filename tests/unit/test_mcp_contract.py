@@ -24,6 +24,7 @@ def test_stable_tools_freeze() -> None:
         "search_memory",
         "search_by_issue",
         "search_by_project",
+        "search_by_component",
     } == STABLE_TOOLS
     assert PRIMARY_TOOL == "build_context"
     assert "query_kind" in DIAGNOSTICS_KEYS

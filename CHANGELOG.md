@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.13.0).
+- Nothing yet (post 1.14.0).
+
+## [1.14.0] - 2026-07-29
+
+### Added
+
+- PB-072: MCP tool `search_by_component` — typed alias scoping `search_context` to a component slug (`listener` / `component:listener`).
+
+### Notes
+
+- Additive to MCP `schema_version` `"1"`; contract freeze updated.
 
 ## [1.13.0] - 2026-07-29
 
@@ -291,7 +301,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianobotelho/DCE/compare/v1.13.0...HEAD
+[Unreleased]: https://github.com/adrianobotelho/DCE/compare/v1.14.0...HEAD
+[1.14.0]: https://github.com/adrianobotelho/DCE/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/adrianobotelho/DCE/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/adrianobotelho/DCE/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/adrianobotelho/DCE/compare/v1.10.0...v1.11.0
