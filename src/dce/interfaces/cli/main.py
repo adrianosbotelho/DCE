@@ -224,6 +224,10 @@ def index_cmd(
             help="Run a single indexer (e.g. markdown, md). Ignores enabled flags.",
         ),
     ] = None,
+    as_json: Annotated[
+        bool,
+        typer.Option("--json", help="Emit machine-readable JSON on stdout."),
+    ] = False,
 ) -> None:
     """Index configured sources into the local SQLite store."""
     try:
@@ -248,22 +252,42 @@ def index_cmd(
             only_source=source,
         )
 
-    table = Table(title="dce index")
-    table.add_column("Indexer")
-    table.add_column("Discovered")
-    table.add_column("Upserted")
-    table.add_column("Detail")
-    for run in result.runs:
-        table.add_row(
-            run.name,
-            str(run.discovered),
-            str(run.upserted),
-            run.detail if not run.skipped else f"skipped ({run.detail})",
+    if as_json:
+        _print_json(
+            {
+                "schema_version": "1",
+                "total_upserted": result.total_upserted,
+                "related_uris_linked": result.related_uris_linked,
+                "runs": [
+                    {
+                        "name": run.name,
+                        "source_type": run.source_type,
+                        "discovered": run.discovered,
+                        "upserted": run.upserted,
+                        "skipped": run.skipped,
+                        "detail": run.detail,
+                    }
+                    for run in result.runs
+                ],
+            }
         )
-    console.print(table)
-    console.print(f"[green]ok[/green] total upserted: {result.total_upserted}")
-    if result.related_uris_linked:
-        console.print(f"related_uris linked: {result.related_uris_linked}")
+    else:
+        table = Table(title="dce index")
+        table.add_column("Indexer")
+        table.add_column("Discovered")
+        table.add_column("Upserted")
+        table.add_column("Detail")
+        for run in result.runs:
+            table.add_row(
+                run.name,
+                str(run.discovered),
+                str(run.upserted),
+                run.detail if not run.skipped else f"skipped ({run.detail})",
+            )
+        console.print(table)
+        console.print(f"[green]ok[/green] total upserted: {result.total_upserted}")
+        if result.related_uris_linked:
+            console.print(f"related_uris linked: {result.related_uris_linked}")
 
     if source and all(run.skipped for run in result.runs):
         raise typer.Exit(code=1)

@@ -51,6 +51,26 @@ def test_cli_facets(tmp_path: Path) -> None:
     assert any(item["value"] == "payments" for item in payload["facets"]["projects"])
 
 
+def test_cli_index_json(tmp_path: Path) -> None:
+    import json
+
+    ws = tmp_path / "workspace"
+    assert runner.invoke(app, ["init", str(ws)]).exit_code == 0
+    docs = ws / "docs"
+    docs.mkdir()
+    (docs / "note.md").write_text(
+        "---\ntitle: Indexed\n---\n\nORA-12541 body\n",
+        encoding="utf-8",
+    )
+    result = runner.invoke(app, ["index", str(ws), "--json"])
+    assert result.exit_code == 0, result.stdout
+    payload = json.loads(result.stdout)
+    assert payload["schema_version"] == "1"
+    assert payload["total_upserted"] >= 1
+    assert isinstance(payload["runs"], list)
+    assert any(run["name"] == "markdown" and run["upserted"] >= 1 for run in payload["runs"])
+
+
 def test_cli_doctor_json(tmp_path: Path) -> None:
     import json
 
