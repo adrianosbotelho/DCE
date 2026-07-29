@@ -12,15 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.19.0` (Sprint 35) |
-| Fase | Pós-1.0 — **Sprint 35 concluída; aguardando aprovação para Sprint 36** |
+| Versão | `1.20.0` (Sprint 36) |
+| Fase | Pós-1.0 — **Sprint 36 concluída; aguardando aprovação para Sprint 37** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
-**1.19.0:** + `doctor --json` + runbook first PyPI (PB-099).  
-**1.18.0:** + CI format + Publish OIDC (PB-098).  
-**1.17.0–1.0.0:** Kiro guide, aliases MCP, Windows Releases, Context Builder.  
-PyPI: [`docs/PublishPyPI.md`](docs/PublishPyPI.md) · Kiro: [`docs/Kiro.md`](docs/Kiro.md).
+**1.20.0:** + MCP/CLI `list_facets` (PB-100).  
+**1.19.0:** + `doctor --json` + runbook PyPI (PB-099).  
+**1.18.0–1.0.0:** Publish OIDC, Kiro guide, aliases MCP, Windows, Context Builder.  
+Kiro: [`docs/Kiro.md`](docs/Kiro.md) · PyPI: [`docs/PublishPyPI.md`](docs/PublishPyPI.md).
 
 ---
 
@@ -114,7 +114,7 @@ Exemplo de registro MCP (Kiro / clientes compatíveis):
 }
 ```
 
-Tools estáveis: `build_context` (primária), `search_context`, `search_memory`, `search_by_issue`, `search_by_project`, `search_by_component`, `search_by_technology`, `search_by_tag`, `get_document`, `recent_documents`.
+Tools estáveis: `build_context` (primária), `search_context`, `search_memory`, `search_by_issue`, `search_by_project`, `search_by_component`, `search_by_technology`, `search_by_tag`, `list_facets`, `get_document`, `recent_documents`.
 
 Qualidade:
 
@@ -223,6 +223,7 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 | `search_by_component` | Alias tipado — escopo por componente |
 | `search_by_technology` | Alias tipado — escopo por tecnologia |
 | `search_by_tag` | Alias tipado — escopo por tag |
+| `list_facets` | Descobre slugs de project/component/technology/tag |
 | `get_document` | Documento completo por ID |
 | `recent_documents` | Documentos recentes |
 
@@ -251,14 +252,14 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 
 ## Próximo passo
 
-Sprint 35 encerrada. **Sprint 36 inicia somente após aprovação explícita.**
+Sprint 36 encerrada. **Sprint 37 inicia somente após aprovação explícita.**
 
 ```bash
 ./scripts/cut_release.sh && git push origin HEAD && ./scripts/cut_release.sh --push
-# First PyPI: follow docs/PublishPyPI.md (pending Trusted Publisher)
+# First PyPI (manual): docs/PublishPyPI.md
 ```
 
-Ver: [`docs/Sprint35.md`](docs/Sprint35.md) · [`docs/PublishPyPI.md`](docs/PublishPyPI.md).
+Ver: [`docs/Sprint36.md`](docs/Sprint36.md) · [`docs/MCP.md`](docs/MCP.md).
 
 ---
 

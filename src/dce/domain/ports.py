@@ -6,7 +6,13 @@ from collections.abc import Iterable, Mapping, Sequence
 from datetime import datetime
 from typing import Any, Protocol, runtime_checkable
 
-from dce.domain.models import Document, ScoredDocument, SearchFilters, SearchSpec
+from dce.domain.models import (
+    Document,
+    ScoredDocument,
+    SearchFilters,
+    SearchSpec,
+    WorkspaceFacets,
+)
 
 
 @runtime_checkable
@@ -36,6 +42,9 @@ class DocumentRepository(Protocol):
         filters: SearchFilters | None = None,
     ) -> list[Document]:
         """List newest documents by updated_at/indexed_at."""
+
+    def list_facets(self) -> WorkspaceFacets:
+        """Return distinct project/component/technology/tag/source_type values."""
 
 
 @runtime_checkable

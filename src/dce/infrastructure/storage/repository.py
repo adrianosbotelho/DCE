@@ -9,7 +9,14 @@ from collections.abc import Sequence
 from datetime import UTC, datetime
 from typing import Any
 
-from dce.domain.models import Document, ScoredDocument, SearchFilters, SearchSpec
+from dce.domain.models import (
+    Document,
+    FacetValue,
+    ScoredDocument,
+    SearchFilters,
+    SearchSpec,
+    WorkspaceFacets,
+)
 from dce.domain.ports import Clock
 from dce.infrastructure.storage.migrations import apply_migrations
 
@@ -245,6 +252,48 @@ class SqliteDocumentRepository:
         params.append(limit)
         rows = self._conn.execute(sql, params).fetchall()
         return [_row_to_document(row) for row in rows]
+
+    def list_facets(self) -> WorkspaceFacets:
+        """Aggregate distinct filter values present in the index."""
+        return WorkspaceFacets(
+            projects=self._facet_column("project"),
+            components=self._facet_column("component"),
+            technologies=self._facet_column("technology"),
+            source_types=self._facet_column("source_type"),
+            tags=self._facet_tags(),
+        )
+
+    def _facet_column(self, column: str) -> list[FacetValue]:
+        allowed = {"project", "component", "technology", "source_type"}
+        if column not in allowed:
+            msg = f"Unsupported facet column: {column}"
+            raise ValueError(msg)
+        rows = self._conn.execute(
+            f"""
+            SELECT {column} AS value, COUNT(*) AS n
+            FROM documents
+            WHERE {column} IS NOT NULL AND TRIM({column}) != ''
+            GROUP BY {column}
+            ORDER BY n DESC, value ASC
+            """
+        ).fetchall()
+        return [FacetValue(value=str(row["value"]), count=int(row["n"])) for row in rows]
+
+    def _facet_tags(self) -> list[FacetValue]:
+        try:
+            rows = self._conn.execute(
+                """
+                SELECT j.value AS value, COUNT(*) AS n
+                FROM documents d, json_each(d.tags_json) AS j
+                WHERE typeof(j.value) = 'text'
+                  AND TRIM(j.value) != ''
+                GROUP BY j.value
+                ORDER BY n DESC, value ASC
+                """
+            ).fetchall()
+        except sqlite3.Error:
+            return []
+        return [FacetValue(value=str(row["value"]), count=int(row["n"])) for row in rows]
 
     @staticmethod
     def _append_filters(

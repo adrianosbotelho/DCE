@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from dce.domain.models import Document, ScoredDocument
+from dce.domain.models import Document, ScoredDocument, WorkspaceFacets
 from dce.interfaces.mcp.contract import MCP_SCHEMA_VERSION
 
 
@@ -15,6 +15,15 @@ class SearchContextResult(BaseModel):
 
     schema_version: str = MCP_SCHEMA_VERSION
     documents: list[ScoredDocument] = Field(default_factory=list)
+
+
+class ListFacetsResult(BaseModel):
+    """Result of ``list_facets``."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    schema_version: str = MCP_SCHEMA_VERSION
+    facets: WorkspaceFacets = Field(default_factory=WorkspaceFacets)
 
 
 class GetDocumentResult(BaseModel):

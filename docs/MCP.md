@@ -39,10 +39,11 @@ sequenceDiagram
 | `search_by_component` | Alias tipado: escopo por slug de componente | `{schema_version, documents[]}` |
 | `search_by_technology` | Alias tipado: escopo por slug de tecnologia | `{schema_version, documents[]}` |
 | `search_by_tag` | Alias tipado: escopo por uma tag | `{schema_version, documents[]}` |
+| `list_facets` | Valores distintos de project/component/technology/tag/source_type | `{schema_version, facets}` |
 | `get_document` | Lookup por id | `{schema_version, found, document}` |
 | `recent_documents` | Mais recentes + filtros | `{schema_version, documents[]}` |
 
-`search_memory` entrou em **1.1.0**; `search_by_issue` em **1.9.0**; `search_by_project` em **1.13.0**; `search_by_component` em **1.14.0**; `search_by_technology` em **1.15.0**; `search_by_tag` em **1.16.0** (aditivos; `schema_version` permanece `"1"`).
+`search_memory` entrou em **1.1.0**; `search_by_issue` em **1.9.0**; `search_by_project`–`search_by_tag` em **1.13–1.16**; `list_facets` em **1.20.0** (aditivos; `schema_version` permanece `"1"`).
 
 ### `build_context` — parâmetros
 
@@ -111,8 +112,9 @@ O processo MCP **não deve** escrever prosa em stdout (stdio é o canal do proto
 6. Usar `search_by_component` para restringir hits a um componente (`listener` / `component:listener`).
 7. Usar `search_by_technology` para restringir hits a uma tecnologia (`oracle` / `technology:oracle`).
 8. Usar `search_by_tag` para restringir hits a uma tag (`oracle` / `tag:oracle`).
-9. Usar `get_document` / `recent_documents` para lookup pontual.
-10. Respeitar `diagnostics.truncated` e o budget — o pacote já veio cortado de propósito.
+9. Usar `list_facets` para descobrir slugs válidos antes dos aliases `search_by_*`.
+10. Usar `get_document` / `recent_documents` para lookup pontual.
+11. Respeitar `diagnostics.truncated` e o budget — o pacote já veio cortado de propósito.
 
 ---
 

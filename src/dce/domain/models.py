@@ -90,6 +90,27 @@ class SearchSpec(BaseModel):
     limit: int = Field(default=20, ge=1, le=500)
 
 
+class FacetValue(BaseModel):
+    """Distinct facet value with document count."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    value: str = Field(min_length=1)
+    count: int = Field(ge=1)
+
+
+class WorkspaceFacets(BaseModel):
+    """Discoverable filter slugs for search_by_* / search_context."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    projects: list[FacetValue] = Field(default_factory=list)
+    components: list[FacetValue] = Field(default_factory=list)
+    technologies: list[FacetValue] = Field(default_factory=list)
+    tags: list[FacetValue] = Field(default_factory=list)
+    source_types: list[FacetValue] = Field(default_factory=list)
+
+
 class ScoredDocument(BaseModel):
     """Document paired with a retrieval score (higher is better)."""
 

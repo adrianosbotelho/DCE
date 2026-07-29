@@ -1,6 +1,6 @@
 # Kiro — adoção rápida do DCE
 
-**Status:** Sprint 35 (`1.19.0`)
+**Status:** Sprint 36 (`1.20.0`)
 
 Guia curto para conectar o [Kiro](https://kiro.dev) ao Dev Context Engine via MCP stdio.
 
@@ -34,11 +34,12 @@ Use caminho absoluto. O processo MCP **não** escreve prosa em stdout.
 ## 3. Como o agente deve perguntar
 
 1. Preferir **`build_context`** para perguntas de desenvolvimento.
-2. Usar aliases tipados quando o escopo for claro:
+2. Se não souber slugs, chamar **`list_facets`** (ou `dce facets`).
+3. Usar aliases tipados quando o escopo for claro:
    - `search_by_issue` — `PAY-125`
    - `search_by_project` / `search_by_component` / `search_by_technology` / `search_by_tag`
-3. `search_memory` só para notas em `.dce/memory`.
-4. Respeitar `diagnostics.truncated` e o budget do pacote.
+4. `search_memory` só para notas em `.dce/memory`.
+5. Respeitar `diagnostics.truncated` e o budget do pacote.
 
 Contrato completo: [`MCP.md`](MCP.md).
 

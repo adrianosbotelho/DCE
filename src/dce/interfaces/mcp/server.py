@@ -26,6 +26,7 @@ from dce.infrastructure.storage.workspace import (
 )
 from dce.interfaces.mcp.schemas import (
     GetDocumentResult,
+    ListFacetsResult,
     RecentDocumentsResult,
     SearchContextResult,
 )
@@ -113,6 +114,7 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
             "Use search_by_component to scope hits to one component slug. "
             "Use search_by_technology to scope hits to one technology slug. "
             "Use search_by_tag to scope hits to one tag. "
+            "Use list_facets to discover project/component/technology/tag slugs. "
             "Use get_document / recent_documents for direct lookups. "
             "All responses are structured JSON with schema_version."
         ),
@@ -242,6 +244,7 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
         project: str | None = None,
         component: str | None = None,
         technology: str | None = None,
+        tags: list[str] | None = None,
         source_types: list[str] | None = None,
     ) -> SearchContextResult:
         """Search documents related to a Jira-like issue key (e.g. PAY-125).
@@ -258,7 +261,7 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
                 project=project,
                 component=component,
                 technology=technology,
-                tags=None,
+                tags=tags,
                 source_types=source_types,
             ),
             limit=max(1, min(limit, 500)),
@@ -403,6 +406,18 @@ def create_mcp_server(workspace_path: Path) -> MCPServer:
             repository = SqliteDocumentRepository(conn)
             hits = repository.search(spec)
         return SearchContextResult(documents=hits)
+
+    @server.tool()
+    def list_facets() -> ListFacetsResult:
+        """List distinct project/component/technology/tag/source_type values.
+
+        Use before search_by_project / search_by_component / search_by_technology /
+        search_by_tag when the agent does not know valid slugs.
+        """
+        with connect(database_path) as conn:
+            repository = SqliteDocumentRepository(conn)
+            facets = repository.list_facets()
+        return ListFacetsResult(facets=facets)
 
     @server.tool()
     def get_document(document_id: str) -> GetDocumentResult:

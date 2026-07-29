@@ -381,6 +381,56 @@ def build_cmd(
     raise typer.Exit(code=1)
 
 
+@app.command("facets")
+def facets_cmd(
+    path: Annotated[
+        Path,
+        typer.Argument(help="Workspace directory containing dce.yaml."),
+    ] = Path("."),
+    as_json: Annotated[
+        bool,
+        typer.Option("--json", help="Emit machine-readable JSON on stdout."),
+    ] = False,
+) -> None:
+    """List distinct project/component/technology/tag/source_type values."""
+    try:
+        _root, _config, database_path = load_workspace(path)
+    except WorkspaceError as exc:
+        err_console.print(f"[red]error:[/red] {exc.message}")
+        raise typer.Exit(code=1) from exc
+
+    with connect(database_path) as conn:
+        facets = SqliteDocumentRepository(conn).list_facets()
+
+    if as_json:
+        _print_json(
+            {
+                "schema_version": "1",
+                "facets": facets.model_dump(mode="json"),
+            }
+        )
+        return
+
+    table = Table(title="dce facets")
+    table.add_column("Facet")
+    table.add_column("Value")
+    table.add_column("Count", justify="right")
+    groups = (
+        ("project", facets.projects),
+        ("component", facets.components),
+        ("technology", facets.technologies),
+        ("tag", facets.tags),
+        ("source_type", facets.source_types),
+    )
+    for name, values in groups:
+        for item in values:
+            table.add_row(name, item.value, str(item.count))
+    if table.row_count == 0:
+        console.print("No facets yet — run `dce index`.")
+        return
+    console.print(table)
+
+
 @app.command("search")
 def search_cmd(
     query: Annotated[str, typer.Argument(help="Full-text query.")],

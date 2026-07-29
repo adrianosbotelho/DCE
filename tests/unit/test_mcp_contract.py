@@ -27,6 +27,7 @@ def test_stable_tools_freeze() -> None:
         "search_by_component",
         "search_by_technology",
         "search_by_tag",
+        "list_facets",
     } == STABLE_TOOLS
     assert PRIMARY_TOOL == "build_context"
     assert "query_kind" in DIAGNOSTICS_KEYS

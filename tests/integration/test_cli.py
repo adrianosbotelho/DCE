@@ -28,6 +28,29 @@ def test_cli_init_and_doctor(tmp_path: Path) -> None:
     assert "fts5" in doctor_result.stdout
 
 
+def test_cli_facets(tmp_path: Path) -> None:
+    import json
+
+    ws = tmp_path / "workspace"
+    assert runner.invoke(app, ["init", str(ws)]).exit_code == 0
+    docs = ws / "docs"
+    docs.mkdir()
+    (docs / "note.md").write_text(
+        "---\ntitle: Facet doc\nproject: payments\ncomponent: db\n"
+        "technology: oracle\ntags: [oracle]\n---\n\nbody\n",
+        encoding="utf-8",
+    )
+    assert runner.invoke(app, ["index", str(ws)]).exit_code == 0
+    table = runner.invoke(app, ["facets", str(ws)])
+    assert table.exit_code == 0, table.stdout
+    assert "payments" in table.stdout
+    as_json = runner.invoke(app, ["facets", str(ws), "--json"])
+    assert as_json.exit_code == 0, as_json.stdout
+    payload = json.loads(as_json.stdout)
+    assert payload["schema_version"] == "1"
+    assert any(item["value"] == "payments" for item in payload["facets"]["projects"])
+
+
 def test_cli_doctor_json(tmp_path: Path) -> None:
     import json
 

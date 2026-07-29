@@ -17,8 +17,11 @@ dce index .
 dce index . --source git          # se habilitado / necessário
 dce index . --source jira_import  # após dropar JSON/CSV em imports/jira
 
-# 3. Validar saúde
+# 3. Validar saúde / descobrir slugs
 dce doctor .
+dce doctor . --json
+dce facets .
+dce facets . --json
 
 # 4. Consultar
 dce build "ORA-12541"

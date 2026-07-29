@@ -138,6 +138,33 @@ def test_upsert_many_empty(tmp_path: Path) -> None:
     assert repo.upsert_many([]) == 0
 
 
+def test_list_facets(tmp_path: Path) -> None:
+    repo = _repo(tmp_path)
+    repo.upsert_many(
+        [
+            _sample("a", tags=["oracle", "network"]),
+            _sample(
+                "b",
+                uri="file:///b.md",
+                project="billing",
+                component="api",
+                technology="java",
+                tags=["java"],
+                source_type="adr",
+            ),
+        ]
+    )
+    facets = repo.list_facets()
+    assert {item.value: item.count for item in facets.projects} == {
+        "payments": 1,
+        "billing": 1,
+    }
+    assert {item.value for item in facets.components} == {"db", "api"}
+    assert {item.value for item in facets.technologies} == {"oracle", "java"}
+    assert {item.value for item in facets.tags} >= {"oracle", "network", "java"}
+    assert {item.value for item in facets.source_types} == {"markdown", "adr"}
+
+
 def test_repository_satisfies_protocol(tmp_path: Path) -> None:
     from dce.domain.ports import DocumentRepository
 
