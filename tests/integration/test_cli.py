@@ -51,6 +51,29 @@ def test_cli_facets(tmp_path: Path) -> None:
     assert any(item["value"] == "payments" for item in payload["facets"]["projects"])
 
 
+def test_cli_recent(tmp_path: Path) -> None:
+    import json
+
+    ws = tmp_path / "workspace"
+    assert runner.invoke(app, ["init", str(ws)]).exit_code == 0
+    docs = ws / "docs"
+    docs.mkdir()
+    (docs / "note.md").write_text(
+        "---\ntitle: Recent doc\nproject: payments\n---\n\nbody\n",
+        encoding="utf-8",
+    )
+    assert runner.invoke(app, ["index", str(ws)]).exit_code == 0
+    result = runner.invoke(app, ["recent", "--path", str(ws), "--format", "json"])
+    assert result.exit_code == 0, result.stdout
+    payload = json.loads(result.stdout)
+    assert payload["schema_version"] == "1"
+    assert len(payload["documents"]) >= 1
+    assert payload["documents"][0]["title"] == "Recent doc"
+    table = runner.invoke(app, ["recent", "--path", str(ws), "--format", "table"])
+    assert table.exit_code == 0, table.stdout
+    assert "Recent doc" in table.stdout
+
+
 def test_cli_tools() -> None:
     import json
 

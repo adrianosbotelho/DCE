@@ -545,6 +545,78 @@ def search_cmd(
     raise typer.Exit(code=1)
 
 
+@app.command("recent")
+def recent_cmd(
+    path: Annotated[
+        Path,
+        typer.Option("--path", "-p", help="Workspace directory."),
+    ] = Path("."),
+    limit: Annotated[int, typer.Option("--limit", "-n", help="Max results.")] = 20,
+    project: Annotated[str | None, typer.Option(help="Filter by project.")] = None,
+    component: Annotated[str | None, typer.Option(help="Filter by component.")] = None,
+    technology: Annotated[str | None, typer.Option(help="Filter by technology.")] = None,
+    tag: Annotated[
+        list[str] | None,
+        typer.Option(help="Filter by tag (repeatable)."),
+    ] = None,
+    source_type: Annotated[
+        list[str] | None,
+        typer.Option("--source-type", help="Filter by source_type (repeatable)."),
+    ] = None,
+    format: Annotated[
+        str,
+        typer.Option("--format", "-f", help="Output format: json|table."),
+    ] = "json",
+) -> None:
+    """List newest indexed documents (CLI parity with MCP recent_documents)."""
+    try:
+        _root, _config, database_path = load_workspace(path)
+    except WorkspaceError as exc:
+        err_console.print(f"[red]error:[/red] {exc.message}")
+        raise typer.Exit(code=1) from exc
+
+    filters = _filters_from_options(
+        project=project,
+        component=component,
+        technology=technology,
+        tag=tag,
+        source_type=source_type,
+    )
+    with connect(database_path) as conn:
+        documents = SqliteDocumentRepository(conn).list_recent(
+            limit=max(1, min(limit, 500)),
+            filters=filters,
+        )
+
+    fmt = format.lower().strip()
+    if fmt == "json":
+        _print_json(
+            {
+                "schema_version": "1",
+                "documents": [doc.model_dump(mode="json") for doc in documents],
+            }
+        )
+        return
+    if fmt == "table":
+        table = Table(title="dce recent")
+        table.add_column("Source")
+        table.add_column("Title")
+        table.add_column("Project")
+        table.add_column("URI")
+        for doc in documents:
+            table.add_row(
+                doc.source_type,
+                doc.title[:60],
+                doc.project or "-",
+                doc.uri,
+            )
+        console.print(table)
+        return
+
+    err_console.print("[red]error:[/red] --format must be json or table")
+    raise typer.Exit(code=1)
+
+
 @app.command("show")
 def show_cmd(
     document_id: Annotated[str, typer.Argument(help="Document id.")],
