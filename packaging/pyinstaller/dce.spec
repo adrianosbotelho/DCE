@@ -10,12 +10,14 @@ SPECDIR = Path(SPECPATH).resolve()
 ROOT = SPECDIR.parents[1]
 SRC = ROOT / "src"
 
-datas = []
+datas = [(str(SRC / "dce" / "interfaces" / "web" / "static"), "dce/interfaces/web/static")]
 binaries = []
 hiddenimports = [
     "dce",
     "dce.interfaces.cli.main",
     "dce.interfaces.mcp.server",
+    "dce.interfaces.web.server",
+    "dce.interfaces.web.service",
     "typer",
     "rich",
     "yaml",

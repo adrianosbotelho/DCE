@@ -9,7 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.26.0).
+- Nothing yet (post 1.27.0).
+
+## [1.27.0] - 2026-07-30
+
+### Added
+
+- PB-107: Local setup web UI — `dce ui` (localhost wizard for init/index/doctor/MCP JSON/build smoke).
+- Docs: [`docs/SetupUI.md`](docs/SetupUI.md), [`docs/adr/ADR-006.md`](docs/adr/ADR-006.md); Windows+Kiro guide prefers the UI.
+
+### Changed
+
+- PB-902 narrowed: cloud/multi-tenant web UI remains out; local setup UI is in scope.
 
 ## [1.26.0] - 2026-07-29
 
@@ -411,7 +422,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.26.0...HEAD
+[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.27.0...HEAD
+[1.27.0]: https://github.com/adrianosbotelho/DCE/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/adrianosbotelho/DCE/compare/v1.25.0...v1.26.0
 [1.25.0]: https://github.com/adrianosbotelho/DCE/compare/v1.24.0...v1.25.0
 [1.24.0]: https://github.com/adrianosbotelho/DCE/compare/v1.23.0...v1.24.0

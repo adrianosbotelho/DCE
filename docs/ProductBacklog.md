@@ -112,6 +112,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-104 | CLI `dce tools` | P2 | Could | XS | E4 | ✅ Sprint 40 |
 | PB-105 | CLI `dce recent` | P2 | Could | XS | E4 | ✅ Sprint 41 |
 | PB-106 | CONTRIBUTING + ProductVision hygiene | P3 | Could | XS | — | ✅ Sprint 42 |
+| PB-107 | Local setup web UI (`dce ui`) | P0 | Must | M | E4/E10 | ✅ Sprint 43 |
 
 ---
 
@@ -121,7 +122,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 |----|------|--------|
 | PB-900 | Banco vetorial / embeddings | Viola requisitos + complexidade |
 | PB-901 | Dependência OpenAI / APIs pagas | Fora da missão |
-| PB-902 | UI web no MVP | Kiro + CLI |
+| PB-902 | UI web multi-tenant / cloud | Anti offline-first; **UI local `dce ui` liberada (ADR-006)** |
 | PB-903 | Microsserviços / fila | Desnecessário offline |
 | PB-904 | Plugin marketplace | Prematuro |
 | PB-905 | Multi-tenant cloud | Anti offline-first |
@@ -154,7 +155,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 42 concluída tecnicamente (`1.26.0`).  
-PB-102…106 (index JSON, doctor stats, tools, recent, CONTRIBUTING).  
-Próxima: Sprint 43 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint42.md`](Sprint42.md) · [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
+Sprint 43 concluída tecnicamente (`1.27.0`).  
+PB-107 (`dce ui` setup web local).  
+Próxima: Sprint 44 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint43.md`](Sprint43.md) · [`SetupUI.md`](SetupUI.md).

@@ -1,3 +1,3 @@
 """Dev Context Engine (DCE) — offline context builder for AI coding agents."""
 
-__version__ = "1.26.0"
+__version__ = "1.27.0"

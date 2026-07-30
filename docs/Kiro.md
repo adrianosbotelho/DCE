@@ -51,6 +51,10 @@ Contrato completo: [`MCP.md`](MCP.md).
 - [ ] Kiro lista tools DCE (`build_context`, `workspace_status`)  
 - [ ] Uma pergunta real no Kiro monta `ContextPackage` com `schema_version: "1"`  
 
-## 5. Windows portable
+## 5. Windows corporativo + Kiro (guia completo)
 
-Se o ambiente for Windows sem Python: baixe o ZIP da Release (`dce.exe`) — [`Windows.md`](Windows.md).
+**Recomendado:** `dce ui` (interface local) — [`SetupUI.md`](SetupUI.md)
+
+Passo a passo Windows: [`KiroWindows.md`](KiroWindows.md)
+
+

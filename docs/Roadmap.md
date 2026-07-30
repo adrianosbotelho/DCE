@@ -60,6 +60,7 @@ timeline
 | **1.24.0** | Tools CLI | `dce tools` | — |
 | **1.25.0** | Recent CLI | `dce recent` | — |
 | **1.26.0** | Docs | CONTRIBUTING + ProductVision hygiene | PyPI first upload |
+| **1.27.0** | Setup UI | Localhost `dce ui` wizard for Kiro/Windows operators | Polish UX / Authenticode |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 

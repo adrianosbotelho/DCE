@@ -863,6 +863,60 @@ def restore_cmd(
     raise typer.Exit(code=1)
 
 
+@app.command("ui")
+def ui_cmd(
+    path: Annotated[
+        Path,
+        typer.Option("--path", "-p", help="Workspace directory to manage."),
+    ] = Path("."),
+    host: Annotated[
+        str,
+        typer.Option("--host", help="Bind host (localhost only)."),
+    ] = "127.0.0.1",
+    port: Annotated[
+        int,
+        typer.Option("--port", help="Local TCP port."),
+    ] = 8765,
+    open_browser: Annotated[
+        bool,
+        typer.Option("--open/--no-open", help="Open the default browser."),
+    ] = True,
+    command: Annotated[
+        str | None,
+        typer.Option(
+            "--command",
+            help="Executable path written into Kiro MCP JSON (default: auto).",
+        ),
+    ] = None,
+) -> None:
+    """Open a local web UI to init/index/configure Kiro (localhost only)."""
+    import sys
+
+    from dce.interfaces.web.server import run_setup_ui
+
+    if command:
+        dce_command = command
+    elif getattr(sys, "frozen", False):
+        dce_command = str(Path(sys.executable).resolve())
+    else:
+        dce_command = "dce"
+
+    try:
+        run_setup_ui(
+            path,
+            host=host,
+            port=port,
+            open_browser=open_browser,
+            dce_command=dce_command,
+        )
+    except ValueError as exc:
+        err_console.print(f"[red]error:[/red] {exc}")
+        raise typer.Exit(code=1) from exc
+    except OSError as exc:
+        err_console.print(f"[red]error:[/red] {exc}")
+        raise typer.Exit(code=1) from exc
+
+
 @app.command("mcp")
 def mcp_cmd(
     path: Annotated[

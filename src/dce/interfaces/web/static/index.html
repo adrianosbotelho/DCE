@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DCE — Configuração</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #1a222c;
+      --text: #e7ecf1;
+      --muted: #9aa7b5;
+      --accent: #3d9cfd;
+      --ok: #3ecf8e;
+      --bad: #f07178;
+      --line: #2a3542;
+      --font: "Segoe UI", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: radial-gradient(1200px 600px at 10% -10%, #1b2a3a, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    h1 { font-size: 1.6rem; margin: 0 0 0.35rem; }
+    .sub { color: var(--muted); margin-bottom: 1.5rem; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .step {
+      display: inline-flex;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #041018;
+      font-size: 0.85rem;
+      font-weight: 700;
+      align-items: center;
+      justify-content: center;
+    }
+    label { display: block; color: var(--muted); font-size: 0.85rem; margin-bottom: 0.35rem; }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #0f161e;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 0.6rem 0.95rem;
+      background: var(--accent);
+      color: #041018;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.secondary { background: #2b3644; color: var(--text); }
+    button:disabled { opacity: 0.5; cursor: wait; }
+    pre, textarea {
+      width: 100%;
+      min-height: 160px;
+      background: #0b1117;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #d7e0ea;
+      padding: 0.75rem;
+      overflow: auto;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .pill.ok { background: rgba(62,207,142,.15); color: var(--ok); }
+    .pill.bad { background: rgba(240,113,120,.15); color: var(--bad); }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    ul.checks { margin: 0.5rem 0 0; padding-left: 1.1rem; color: var(--muted); }
+    ul.checks li { margin: 0.25rem 0; }
+    .flash { margin-top: 0.75rem; font-size: 0.9rem; }
+    .flash.ok { color: var(--ok); }
+    .flash.bad { color: var(--bad); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Dev Context Engine</h1>
+    <p class="sub">Assistente local de configuração para o Kiro — roda só em <code>127.0.0.1</code>, sem internet.</p>
+
+    <section class="card">
+      <h2><span class="step">1</span> Pasta do projeto (workspace)</h2>
+      <label for="path">Caminho absoluto da pasta do projeto</label>
+      <input id="path" type="text" placeholder="C:\work\meu-projeto" />
+      <label for="name" style="margin-top:0.75rem">Nome do workspace (opcional)</label>
+      <input id="name" type="text" placeholder="meu-projeto" />
+      <label for="command" style="margin-top:0.75rem">Comando DCE no Kiro (no Windows: caminho do dce.exe)</label>
+      <input id="command" type="text" placeholder="C:\Tools\dce\dce.exe" />
+      <div class="row">
+        <button id="btn-use" type="button">Usar esta pasta</button>
+        <button id="btn-init" class="secondary" type="button">Criar / inicializar</button>
+        <button id="btn-sample" class="secondary" type="button">Criar doc de exemplo</button>
+      </div>
+      <div id="msg-workspace" class="flash"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">2</span> Indexar conhecimento</h2>
+      <p class="muted">Lê markdown/ADRs/etc. do workspace e grava no SQLite local.</p>
+      <div class="row">
+        <button id="btn-index" type="button">Indexar agora</button>
+        <button id="btn-refresh" class="secondary" type="button">Atualizar status</button>
+      </div>
+      <div id="msg-index" class="flash"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">3</span> Saúde do workspace</h2>
+      <div id="health">
+        <span class="pill bad">não carregado</span>
+      </div>
+      <ul id="checks" class="checks"></ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">4</span> Configuração MCP do Kiro</h2>
+      <p class="muted">Copie o JSON abaixo e cole nas configurações MCP do Kiro. Depois reinicie o servidor MCP.</p>
+      <textarea id="mcp-json" readonly></textarea>
+      <div class="row">
+        <button id="btn-mcp" class="secondary" type="button">Gerar JSON</button>
+        <button id="btn-copy" type="button">Copiar</button>
+      </div>
+      <div id="msg-mcp" class="flash"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">5</span> Teste rápido</h2>
+      <label for="query">Pergunta de teste</label>
+      <input id="query" type="text" value="ORA-12541" />
+      <div class="row">
+        <button id="btn-build" type="button">Testar build_context</button>
+      </div>
+      <pre id="build-out" class="muted">Resultado aparece aqui.</pre>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    async function api(path, options) {
+      const res = await fetch(path, options);
+      const data = await res.json();
+      if (!res.ok && data && data.error) throw new Error(data.error);
+      if (data && data.ok === false && data.error) throw new Error(data.error);
+      return data;
+    }
+
+    function setFlash(id, text, ok) {
+      const el = $(id);
+      el.textContent = text || "";
+      el.className = "flash " + (ok ? "ok" : "bad");
+    }
+
+    function workspacePath() {
+      return $("path").value.trim();
+    }
+
+    function renderStatus(data) {
+      const health = $("health");
+      const checks = $("checks");
+      checks.innerHTML = "";
+      if (!data.initialized) {
+        health.innerHTML = '<span class="pill bad">não inicializado</span>';
+        checks.innerHTML = "<li>" + (data.error || "Clique em Criar / inicializar") + "</li>";
+        return;
+      }
+      const ok = !!(data.ok || (data.status && data.status.healthy));
+      health.innerHTML = ok
+        ? '<span class="pill ok">healthy</span>'
+        : '<span class="pill bad">com problemas</span>';
+      const status = data.status || {};
+      const meta = [];
+      if (typeof status.document_count === "number") {
+        meta.push("<li>documentos: " + status.document_count + "</li>");
+      }
+      if (status.newest_indexed_at) {
+        meta.push("<li>último index: " + status.newest_indexed_at + "</li>");
+      }
+      (status.checks || []).forEach((c) => {
+        meta.push("<li>" + (c.ok ? "✓" : "✗") + " " + c.name + " — " + c.detail + "</li>");
+      });
+      checks.innerHTML = meta.join("");
+    }
+
+    async function refreshStatus() {
+      const path = workspacePath();
+      const q = path ? ("?path=" + encodeURIComponent(path)) : "";
+      const data = await api("/api/status" + q);
+      if (data.workspace_path) $("path").value = data.workspace_path;
+      renderStatus(data);
+      return data;
+    }
+
+    async function refreshMcp() {
+      const path = workspacePath();
+      const command = $("command").value.trim();
+      const qs = new URLSearchParams();
+      if (path) qs.set("path", path);
+      if (command) qs.set("command", command);
+      const data = await api("/api/mcp-config?" + qs.toString());
+      $("mcp-json").value = data.config_json || "";
+      return data;
+    }
+
+    $("btn-use").onclick = async () => {
+      try {
+        await api("/api/set-workspace", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ path: workspacePath() }),
+        });
+        await refreshStatus();
+        await refreshMcp();
+        setFlash("msg-workspace", "Pasta selecionada.", true);
+      } catch (e) {
+        setFlash("msg-workspace", e.message, false);
+      }
+    };
+
+    $("btn-init").onclick = async () => {
+      try {
+        const data = await api("/api/init", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            path: workspacePath(),
+            name: $("name").value.trim() || null,
+          }),
+        });
+        $("path").value = data.workspace_path;
+        await refreshStatus();
+        await refreshMcp();
+        setFlash("msg-workspace", "Workspace inicializado.", true);
+      } catch (e) {
+        setFlash("msg-workspace", e.message, false);
+      }
+    };
+
+    $("btn-sample").onclick = async () => {
+      try {
+        const data = await api("/api/seed-sample", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ path: workspacePath() }),
+        });
+        setFlash(
+          "msg-workspace",
+          data.created ? "Documento de exemplo criado em docs/." : "Exemplo já existia.",
+          true
+        );
+      } catch (e) {
+        setFlash("msg-workspace", e.message, false);
+      }
+    };
+
+    $("btn-index").onclick = async () => {
+      $("btn-index").disabled = true;
+      try {
+        const data = await api("/api/index", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ path: workspacePath() }),
+        });
+        await refreshStatus();
+        setFlash("msg-index", "Indexação ok. Upserts: " + data.total_upserted, true);
+      } catch (e) {
+        setFlash("msg-index", e.message, false);
+      } finally {
+        $("btn-index").disabled = false;
+      }
+    };
+
+    $("btn-refresh").onclick = async () => {
+      try {
+        await refreshStatus();
+        setFlash("msg-index", "Status atualizado.", true);
+      } catch (e) {
+        setFlash("msg-index", e.message, false);
+      }
+    };
+
+    $("btn-mcp").onclick = async () => {
+      try {
+        await refreshMcp();
+        setFlash("msg-mcp", "JSON gerado.", true);
+      } catch (e) {
+        setFlash("msg-mcp", e.message, false);
+      }
+    };
+
+    $("btn-copy").onclick = async () => {
+      try {
+        await navigator.clipboard.writeText($("mcp-json").value);
+        setFlash("msg-mcp", "Copiado para a área de transferência.", true);
+      } catch (e) {
+        setFlash("msg-mcp", "Não foi possível copiar automaticamente — selecione o texto e copie.", false);
+      }
+    };
+
+    $("btn-build").onclick = async () => {
+      try {
+        const data = await api("/api/build", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            path: workspacePath(),
+            text: $("query").value.trim() || "ORA-12541",
+          }),
+        });
+        $("build-out").textContent = JSON.stringify(
+          {
+            schema_version: data.schema_version,
+            document_count: data.document_count,
+            titles: data.titles,
+            diagnostics: data.diagnostics,
+          },
+          null,
+          2
+        );
+      } catch (e) {
+        $("build-out").textContent = "Erro: " + e.message;
+      }
+    };
+
+    (async () => {
+      try {
+        const health = await api("/api/health");
+        if (health.workspace_path) $("path").value = health.workspace_path;
+        const host = navigator.platform.toLowerCase().includes("win")
+          ? "C:\\\\Tools\\\\dce\\\\dce.exe"
+          : "dce";
+        if (!$("command").value) $("command").value = host;
+        await refreshStatus();
+        await refreshMcp();
+      } catch (e) {
+        setFlash("msg-workspace", e.message, false);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -46,14 +46,24 @@ Saída:
 
 ## Uso rápido
 
+**Recomendado (sem CLI avançada):** interface local — ver [`SetupUI.md`](SetupUI.md)
+
 ```powershell
-Expand-Archive dce-1.11.0-windows-x64.zip -DestinationPath C:\Tools\dce
+Expand-Archive dce-1.27.0-windows-x64.zip -DestinationPath C:\Tools\dce
 cd C:\Tools\dce
 .\dce.exe --version
+.\dce.exe ui --path C:\work\meu-projeto
+```
+
+Alternativa CLI:
+
+```powershell
 .\dce.exe init C:\work\meu-projeto
 .\dce.exe index C:\work\meu-projeto
 .\dce.exe doctor C:\work\meu-projeto
 ```
+
+Guia Kiro: [`KiroWindows.md`](KiroWindows.md)
 
 ---
 

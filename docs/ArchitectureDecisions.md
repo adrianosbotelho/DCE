@@ -21,6 +21,7 @@ Cada ADR vive em [`docs/adr/`](adr/) no formato proposto por Michael Nygard.
 | [ADR-003](adr/ADR-003.md) | Interface MCP-first otimizada para Kiro | Accepted | 2026-07-29 |
 | [ADR-004](adr/ADR-004.md) | Estabilidade do contrato MCP schema_version 1 | Accepted | 2026-07-29 |
 | [ADR-005](adr/ADR-005.md) | Nome de distribuição PyPI `dev-context-engine` | Accepted | 2026-07-29 |
+| [ADR-006](adr/ADR-006.md) | UI local de setup (`dce ui`, localhost-only) | Accepted | 2026-07-30 |
 
 ## Quando criar um ADR
 
@@ -41,5 +42,6 @@ flowchart LR
   A2 --> A3[ADR-003 MCP Kiro]
   A3 --> A4[ADR-004 MCP schema v1]
   A4 --> A5[ADR-005 PyPI name]
+  A3 --> A6[ADR-006 Local setup UI]
   A1 --> A3
 ```

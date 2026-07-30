@@ -14,6 +14,10 @@ def test_windows_portable_packaging_files_exist() -> None:
     assert (ROOT / ".github" / "workflows" / "windows-portable.yml").is_file()
     assert (ROOT / "docs" / "Windows.md").is_file()
     assert (ROOT / "docs" / "ReleaseWindows.md").is_file()
+    assert (ROOT / "src" / "dce" / "interfaces" / "web" / "static" / "index.html").is_file()
+    spec = (ROOT / "packaging" / "pyinstaller" / "dce.spec").read_text(encoding="utf-8")
+    assert "interfaces/web/static" in spec
+    assert "dce.interfaces.web.server" in spec
 
 
 def test_windows_doc_mentions_kiro_and_zip() -> None:

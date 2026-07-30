@@ -12,15 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.26.0` (Sprint 42) |
-| Fase | Pós-1.0 — **Sprint 42 concluída; aguardando aprovação para Sprint 43** |
+| Versão | `1.27.0` (Sprint 43) |
+| Fase | Pós-1.0 — **Sprint 43 concluída; aguardando aprovação para Sprint 44** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
-**1.26.0:** + CONTRIBUTING (PB-106).  
-**1.25.0–1.22.0:** `dce recent` / `tools` / doctor stats / `index --json`.  
-**1.21.0–1.0.0:** workspace_status, facets, aliases MCP, Windows Releases, Context Builder.  
-Kiro: [`docs/Kiro.md`](docs/Kiro.md) · Contribute: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+**1.27.0:** + UI local `dce ui` para configurar sem CLI (PB-107).  
+**1.26.0:** + CONTRIBUTING.  
+**1.25.0–1.0.0:** recent/tools/stats, MCP facets/status, Windows Releases, Context Builder.  
+Windows+Kiro: [`docs/KiroWindows.md`](docs/KiroWindows.md) · UI: [`docs/SetupUI.md`](docs/SetupUI.md).
 
 ---
 
@@ -253,14 +253,14 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 
 ## Próximo passo
 
-Sprint 42 encerrada. **Sprint 43 inicia somente após aprovação explícita.**
+Sprint 43 encerrada. **Sprint 44 inicia somente após aprovação explícita.**
 
 ```bash
+dce ui --path /seu/projeto          # setup sem CLI avançada
 ./scripts/cut_release.sh && git push origin HEAD && ./scripts/cut_release.sh --push
-# First PyPI (manual): docs/PublishPyPI.md
 ```
 
-Ver: [`docs/Sprint42.md`](docs/Sprint42.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Ver: [`docs/Sprint43.md`](docs/Sprint43.md) · [`docs/SetupUI.md`](docs/SetupUI.md) · [`docs/KiroWindows.md`](docs/KiroWindows.md).
 
 ---
 
