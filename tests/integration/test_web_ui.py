@@ -73,6 +73,11 @@ def test_ui_http_wizard_flow(tmp_path: Path) -> None:
         mcp = json.loads(conn.getresponse().read().decode())
         assert "mcpServers" in mcp["config"]
 
+        conn.request("GET", "/api/steering")
+        steering = json.loads(conn.getresponse().read().decode())
+        assert steering["ok"] is True
+        assert "build_context" in steering["steering_markdown"]
+
         build_body = json.dumps({"path": workspace, "text": "ORA-12541"}).encode()
         conn.request(
             "POST",

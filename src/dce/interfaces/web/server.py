@@ -113,6 +113,10 @@ def make_handler(state: SetupUIState) -> type[BaseHTTPRequestHandler]:
                 )
                 self._send(status, body, ctype)
                 return
+            if parsed.path == "/api/steering":
+                status, body, ctype = _json_bytes(service.steering_payload())
+                self._send(status, body, ctype)
+                return
             status, body, ctype = _json_bytes({"ok": False, "error": "Not found"}, status=404)
             self._send(status, body, ctype)
 

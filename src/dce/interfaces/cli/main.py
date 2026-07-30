@@ -863,6 +863,28 @@ def restore_cmd(
     raise typer.Exit(code=1)
 
 
+@app.command("steering")
+def steering_cmd(
+    format: Annotated[
+        str,
+        typer.Option("--format", "-f", help="Output format: text or json."),
+    ] = "text",
+) -> None:
+    """Print Kiro steering rules so the agent uses DCE without every prompt."""
+    from dce.interfaces.kiro_steering import steering_payload
+
+    payload = steering_payload()
+    fmt = format.lower().strip()
+    if fmt == "json":
+        _print_json(payload)
+        return
+    if fmt == "text":
+        console.print(payload["steering_markdown"], end="")
+        return
+    err_console.print("[red]error:[/red] --format must be json or text")
+    raise typer.Exit(code=1)
+
+
 @app.command("ui")
 def ui_cmd(
     path: Annotated[

@@ -18,6 +18,7 @@ hiddenimports = [
     "dce.interfaces.mcp.server",
     "dce.interfaces.web.server",
     "dce.interfaces.web.service",
+    "dce.interfaces.kiro_steering",
     "typer",
     "rich",
     "yaml",

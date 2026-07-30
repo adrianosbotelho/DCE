@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet (post 1.27.0).
+- Nothing yet (post 1.28.0).
+
+## [1.28.0] - 2026-07-30
+
+### Added
+
+- PB-108: Kiro steering pack — `dce steering`, `/api/steering`, UI copy step, [`docs/KiroSteering.md`](docs/KiroSteering.md).
 
 ## [1.27.0] - 2026-07-30
 
@@ -422,7 +428,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Earlier foundation releases (store, markdown, context builder).
 
-[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.27.0...HEAD
+[Unreleased]: https://github.com/adrianosbotelho/DCE/compare/v1.28.0...HEAD
+[1.28.0]: https://github.com/adrianosbotelho/DCE/compare/v1.27.0...v1.28.0
 [1.27.0]: https://github.com/adrianosbotelho/DCE/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/adrianosbotelho/DCE/compare/v1.25.0...v1.26.0
 [1.25.0]: https://github.com/adrianosbotelho/DCE/compare/v1.24.0...v1.25.0

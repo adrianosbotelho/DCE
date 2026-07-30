@@ -61,6 +61,7 @@ timeline
 | **1.25.0** | Recent CLI | `dce recent` | — |
 | **1.26.0** | Docs | CONTRIBUTING + ProductVision hygiene | PyPI first upload |
 | **1.27.0** | Setup UI | Localhost `dce ui` wizard for Kiro/Windows operators | Polish UX / Authenticode |
+| **1.28.0** | Kiro steering | Ready-to-paste rules so agents call `build_context` without every prompt | Authenticode / feedback |
 
 RC: `1.0.0rc1` (Sprint 15) — ver [`ReleaseChecklist-1.0.md`](ReleaseChecklist-1.0.md).
 

@@ -19,9 +19,7 @@ def test_pyproject_distribution_name_and_script() -> None:
     wheel = data["tool"]["hatch"]["build"]["targets"]["wheel"]
     assert wheel["packages"] == ["src/dce"]
     assert wheel["force-include"] == {
-        "src/dce/interfaces/web/static/index.html": (
-            "dce/interfaces/web/static/index.html"
-        )
+        "src/dce/interfaces/web/static/index.html": "dce/interfaces/web/static/index.html"
     }
 
 

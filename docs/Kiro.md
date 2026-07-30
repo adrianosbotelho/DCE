@@ -42,6 +42,9 @@ Use caminho absoluto. O processo MCP **não** escreve prosa em stdout.
 5. `search_memory` só para notas em `.dce/memory`.
 6. Respeitar `diagnostics.truncated` e o budget do pacote.
 
+**Dia a dia:** cole o steering pronto (`dce steering` ou passo 5 da UI) nas regras do Kiro —  
+veja [`KiroSteering.md`](KiroSteering.md). Assim você **não** precisa pedir o MCP em todo prompt.
+
 Contrato completo: [`MCP.md`](MCP.md).
 
 ## 4. Smoke checklist

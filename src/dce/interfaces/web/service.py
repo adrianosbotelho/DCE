@@ -19,6 +19,7 @@ from dce.infrastructure.storage.workspace import (
     init_workspace,
     load_workspace,
 )
+from dce.interfaces.kiro_steering import steering_payload as kiro_steering_payload
 from dce.interfaces.mcp.schemas import WorkspaceStatusResult
 
 
@@ -129,6 +130,11 @@ def build_payload(path: Path, text: str) -> dict[str, Any]:
         "titles": [item.document.title for item in package.documents[:10]],
         "diagnostics": package.diagnostics.model_dump(mode="json"),
     }
+
+
+def steering_payload() -> dict[str, Any]:
+    """Kiro steering text for the setup wizard / CLI."""
+    return dict(kiro_steering_payload())
 
 
 def mcp_config_payload(path: Path, *, dce_command: str = "dce") -> dict[str, Any]:

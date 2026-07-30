@@ -1,6 +1,6 @@
 # Guia prático — DCE no Windows corporativo + Kiro
 
-**Versão alvo:** `1.27.0`  
+**Versão alvo:** `1.28.0`  
 **Modo recomendado:** portable (`dce.exe`) + **interface web local** (`dce ui`)
 
 Não precisa de Python, PyPI nem internet na máquina Windows.
@@ -9,7 +9,7 @@ Não precisa de Python, PyPI nem internet na máquina Windows.
 
 ## O que copiar (Mac → Windows)
 
-Da Release: https://github.com/adrianosbotelho/DCE/releases/tag/v1.27.0  
+Da Release: https://github.com/adrianosbotelho/DCE/releases/tag/v1.28.0  
 (ou a tag mais nova)
 
 | Arquivo | Para quê |
@@ -24,7 +24,7 @@ Da Release: https://github.com/adrianosbotelho/DCE/releases/tag/v1.27.0
 ### 1. Extrair
 
 ```powershell
-Expand-Archive .\dce-1.27.0-windows-x64.zip -DestinationPath C:\Tools\dce -Force
+Expand-Archive .\dce-1.28.0-windows-x64.zip -DestinationPath C:\Tools\dce -Force
 cd C:\Tools\dce
 .\dce.exe --version
 ```
@@ -47,7 +47,8 @@ Na tela, siga os passos:
 4. Confira se o status fica **healthy**  
 5. Em “Comando DCE no Kiro”, use `C:\Tools\dce\dce.exe`  
 6. **Gerar JSON** → **Copiar**  
-7. **Testar build_context** com `ORA-12541`
+7. **Copiar steering** (passo 5) e colar nas regras do Kiro — [`KiroSteering.md`](KiroSteering.md)  
+8. **Testar build_context** com `ORA-12541`
 
 Detalhes da UI: [`SetupUI.md`](SetupUI.md)
 

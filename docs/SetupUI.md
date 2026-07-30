@@ -1,6 +1,6 @@
 # Setup UI — `dce ui`
 
-**Status:** Sprint 43 (`1.27.0`) · ADR: [`adr/ADR-006.md`](adr/ADR-006.md)
+**Status:** Sprint 44 (`1.28.0`) · ADR: [`adr/ADR-006.md`](adr/ADR-006.md)
 
 Assistente **local** (só `127.0.0.1`) para pessoas que não usam linha de comando.
 
@@ -30,7 +30,8 @@ dce ui --path C:\work\app --command C:\Tools\dce\dce.exe
 3. Indexar fontes
 4. Mostrar saúde (doctor)
 5. Gerar e copiar JSON MCP do Kiro
-6. Testar `build_context`
+6. Copiar **steering** (regras de uso no dia a dia) — [`KiroSteering.md`](KiroSteering.md)
+7. Testar `build_context`
 
 Tudo offline. Não envia dados para internet.
 
@@ -38,7 +39,7 @@ Tudo offline. Não envia dados para internet.
 
 1. Extrair `dce-*-windows-x64.zip` em `C:\Tools\dce`
 2. `.\dce.exe ui --path C:\work\meu-projeto`
-3. Na UI: **Criar / inicializar** → **Criar doc de exemplo** (ou use docs reais) → **Indexar** → **Copiar** JSON → colar no Kiro
-4. Testar no chat do Kiro com `build_context`
+3. Na UI: **Criar / inicializar** → **Criar doc de exemplo** (ou use docs reais) → **Indexar** → **Copiar** JSON → **Copiar steering** → colar no Kiro
+4. Perguntar no chat em linguagem natural (sem precisar pedir o MCP a cada vez)
 
 Guia completo: [`KiroWindows.md`](KiroWindows.md)

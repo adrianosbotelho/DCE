@@ -159,7 +159,18 @@
     </section>
 
     <section class="card">
-      <h2><span class="step">5</span> Teste rápido</h2>
+      <h2><span class="step">5</span> Steering do Kiro (uso no dia a dia)</h2>
+      <p class="muted">Cole este texto nas regras / steering do Kiro. Assim o agente chama <code>build_context</code> sozinho — você não precisa pedir o MCP em todo prompt.</p>
+      <textarea id="steering-text" readonly></textarea>
+      <div class="row">
+        <button id="btn-steering" class="secondary" type="button">Carregar texto</button>
+        <button id="btn-copy-steering" type="button">Copiar steering</button>
+      </div>
+      <div id="msg-steering" class="flash"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">6</span> Teste rápido</h2>
       <label for="query">Pergunta de teste</label>
       <input id="query" type="text" value="ORA-12541" />
       <div class="row">
@@ -233,6 +244,12 @@
       if (command) qs.set("command", command);
       const data = await api("/api/mcp-config?" + qs.toString());
       $("mcp-json").value = data.config_json || "";
+      return data;
+    }
+
+    async function refreshSteering() {
+      const data = await api("/api/steering");
+      $("steering-text").value = data.steering_markdown || "";
       return data;
     }
 
@@ -331,6 +348,25 @@
       }
     };
 
+    $("btn-steering").onclick = async () => {
+      try {
+        await refreshSteering();
+        setFlash("msg-steering", "Texto carregado.", true);
+      } catch (e) {
+        setFlash("msg-steering", e.message, false);
+      }
+    };
+
+    $("btn-copy-steering").onclick = async () => {
+      try {
+        if (!$("steering-text").value) await refreshSteering();
+        await navigator.clipboard.writeText($("steering-text").value);
+        setFlash("msg-steering", "Steering copiado.", true);
+      } catch (e) {
+        setFlash("msg-steering", "Não foi possível copiar — selecione o texto e copie.", false);
+      }
+    };
+
     $("btn-build").onclick = async () => {
       try {
         const data = await api("/api/build", {
@@ -366,6 +402,7 @@
         if (!$("command").value) $("command").value = host;
         await refreshStatus();
         await refreshMcp();
+        await refreshSteering();
       } catch (e) {
         setFlash("msg-workspace", e.message, false);
       }

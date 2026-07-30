@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_version_matches_pyproject() -> None:
     data = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
-    assert __version__ == data["project"]["version"] == "1.27.0"
+    assert __version__ == data["project"]["version"] == "1.28.0"
     assert "Development Status :: 5 - Production/Stable" in data["project"]["classifiers"]
 
 

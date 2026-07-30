@@ -12,15 +12,15 @@
 
 | Item | Valor |
 |------|--------|
-| Versão | `1.27.0` (Sprint 43) |
-| Fase | Pós-1.0 — **Sprint 43 concluída; aguardando aprovação para Sprint 44** |
+| Versão | `1.28.0` (Sprint 44) |
+| Fase | Pós-1.0 — **Sprint 44 concluída; aguardando aprovação para Sprint 45** |
 | Licença | MIT |
 | Stack | Python 3.12+, SQLite FTS5, Typer, Rich, PyYAML, Pydantic, MCP SDK |
 
-**1.27.0:** + UI local `dce ui` para configurar sem CLI (PB-107).  
-**1.26.0:** + CONTRIBUTING.  
-**1.25.0–1.0.0:** recent/tools/stats, MCP facets/status, Windows Releases, Context Builder.  
-Windows+Kiro: [`docs/KiroWindows.md`](docs/KiroWindows.md) · UI: [`docs/SetupUI.md`](docs/SetupUI.md).
+**1.28.0:** + steering Kiro (`dce steering`) para uso sem MCP em todo prompt (PB-108).  
+**1.27.0:** + UI local `dce ui`.  
+**1.26.0–1.0.0:** CONTRIBUTING, ops CLI, MCP facets/status, Windows Releases, Context Builder.  
+Kiro: [`docs/KiroSteering.md`](docs/KiroSteering.md) · UI: [`docs/SetupUI.md`](docs/SetupUI.md).
 
 ---
 
@@ -253,14 +253,15 @@ Ferramentas MCP **estáveis** (`schema_version: "1"` — ver [`docs/MCP.md`](doc
 
 ## Próximo passo
 
-Sprint 43 encerrada. **Sprint 44 inicia somente após aprovação explícita.**
+Sprint 44 encerrada. **Sprint 45 inicia somente após aprovação explícita.**
 
 ```bash
-dce ui --path /seu/projeto          # setup sem CLI avançada
+dce steering                        # regras para o Kiro usar DCE sozinho
+dce ui --path /seu/projeto          # setup + copiar MCP/steering
 ./scripts/cut_release.sh && git push origin HEAD && ./scripts/cut_release.sh --push
 ```
 
-Ver: [`docs/Sprint43.md`](docs/Sprint43.md) · [`docs/SetupUI.md`](docs/SetupUI.md) · [`docs/KiroWindows.md`](docs/KiroWindows.md).
+Ver: [`docs/Sprint44.md`](docs/Sprint44.md) · [`docs/KiroSteering.md`](docs/KiroSteering.md).
 
 ---
 

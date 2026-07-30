@@ -113,6 +113,7 @@ IDs estáveis: `PB-XXX`. Sprint planning referencia estes IDs.
 | PB-105 | CLI `dce recent` | P2 | Could | XS | E4 | ✅ Sprint 41 |
 | PB-106 | CONTRIBUTING + ProductVision hygiene | P3 | Could | XS | — | ✅ Sprint 42 |
 | PB-107 | Local setup web UI (`dce ui`) | P0 | Must | M | E4/E10 | ✅ Sprint 43 |
+| PB-108 | Kiro steering pack (auto-use build_context) | P1 | Should | S | E4 | ✅ Sprint 44 |
 
 ---
 
@@ -155,7 +156,7 @@ flowchart LR
 
 ## Sprint atual
 
-Sprint 43 concluída tecnicamente (`1.27.0`).  
-PB-107 (`dce ui` setup web local).  
-Próxima: Sprint 44 — **aguardando aprovação do maintainer**.  
-Detalhes: [`Sprint43.md`](Sprint43.md) · [`SetupUI.md`](SetupUI.md).
+Sprint 44 concluída tecnicamente (`1.28.0`).  
+PB-108 (steering Kiro para uso sem invocação manual constante).  
+Próxima: Sprint 45 — **aguardando aprovação do maintainer**.  
+Detalhes: [`Sprint44.md`](Sprint44.md) · [`KiroSteering.md`](KiroSteering.md).
